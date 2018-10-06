@@ -17,9 +17,7 @@
     "url": "https://github.com/ps3611/mth-client/issues"
   },
   "homepage": "https://github.com/ps3611/mth-client#readme",
-  "dependencies": {
-    "create-react-app": "^2.0.3"
-  },
+  "dependencies": {},
   "devDependencies": {
     "eslint": "^5.6.1",
     "eslint-config-airbnb": "^17.1.0",
