@@ -4,7 +4,11 @@ module.exports = {
         "commonjs": true,
         "es6": true
     },
-    "extends": "eslint:recommended",
+    'extends': [
+    'plugin:react/recommended',
+    "eslint:recommended"
+],
+    // "extends": "eslint:recommended",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
