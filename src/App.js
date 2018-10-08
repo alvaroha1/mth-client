@@ -6,6 +6,7 @@ import './App.css'
 import Navbar from './components/Navbar'
 import Display from './components/Display'
 import Filter from './components/Filter'
+import SwitchViews from './components/SwitchViews'
 
 class App extends Component {
 	render() {
@@ -15,8 +16,14 @@ class App extends Component {
 			<div className="NavBar"><Navbar /></div>
 		
 				<div className="basicFlexbox column">	
-					<div className="Filter column is-one-quarter"><Filter /></div>
-					<div className="Display column is-three-quarter"><Display /></div>
+					<div className="Filter column is-one-quarter">
+						<Filter />
+						<SwitchViews />
+					</div>
+
+					<div className="Display column is-three-quarter">
+						<Display />
+					</div>
 				
 				</div>
 			</div>
