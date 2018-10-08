@@ -1,5 +1,5 @@
 import { Component } from 'react'
-// import Bulma from 'bulma'
+import Bulma from 'bulma'
 import * as React from 'react'
 import './App.css'
 
@@ -12,9 +12,13 @@ class App extends Component {
 		return (
 
 			<div className="App">
-				<Navbar />
-				<Display />
-				<Filter />
+			<div className="NavBar"><Navbar /></div>
+		
+				<div className="basicFlexbox column">	
+					<div className="Filter column is-one-quarter"><Filter /></div>
+					<div className="Display column is-three-quarter"><Display /></div>
+				
+				</div>
 			</div>
 		)
 	}
