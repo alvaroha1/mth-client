@@ -2,7 +2,20 @@
 /* .NavBar {
 	border: 2px solid red;			
 } */
+/* 
+body{
+	height:100%;
+	width: 100%;
+ }
+ 
+ #app div{
+ height:100%;
+ width: 100%;
+ } */
 
+/* #wrapper {
+	min-height: 100%; 
+} */
 .Filter {
 	border: 2px solid green;			
 }
