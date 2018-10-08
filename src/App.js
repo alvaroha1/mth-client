@@ -11,20 +11,16 @@ import SwitchViews from './components/SwitchViews'
 class App extends Component {
 	render() {
 		return (
-
 			<div className="App">
 			<div className="NavBar"><Navbar /></div>
-		
 				<div className="basicFlexbox column">	
 					<div className="Filter column is-one-quarter">
 						<Filter />
 						<SwitchViews />
 					</div>
-
 					<div className="Display column is-three-quarter">
 						<Display />
 					</div>
-				
 				</div>
 			</div>
 		)
