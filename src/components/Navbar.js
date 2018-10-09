@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class Navbar extends Component {
 	render() {
 		return (
-			<div classNameName="Navbar">
+			<div className="Navbar">
 				<nav className="navbar is-dark" role="navigation" aria-label="main navigation">
 					<div className="navbar-brand">
 						<a className="navbar-item" href="https://bulma.io">
