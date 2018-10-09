@@ -13,8 +13,8 @@ class Display extends Component {
 			isMapOn: this.props.isMapOn,
 		}
 	}
-	// renderMapOrItemList = () => {
   // }
+	
 
 	render() {
 		if(this.state.isMapOn) {
