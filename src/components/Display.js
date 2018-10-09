@@ -13,7 +13,6 @@ class Display extends Component {
 			isMapOn: this.props.isMapOn,
 		}
 	}
-  // }
 	
 
 	render() {
