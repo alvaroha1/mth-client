@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 // import Bulma from 'bulma'
 import Map from './Map'
 import ItemList from './ItemList'
+import { connect } from 'react-redux'
 
 
 // const Display = this.state.bool ? Map : Results;
@@ -35,4 +36,11 @@ class Display extends Component {
 	}
 }
 
-export default Display
+const mapStateToProps = (state) => ({
+	mapToggle:state.isMapOn
+})
+
+const mapDispatchToProps = () => ({
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Display)

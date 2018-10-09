@@ -8,7 +8,7 @@ const reducer = (state = initalState, action) => {
 	case 'MAP_TOGGLE_SUCCESS':
 		return {
 			...state,
-			isMapOn: action.data
+			mapToggle: action.data
 		}
 		
 	default:
