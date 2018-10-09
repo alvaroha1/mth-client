@@ -4,17 +4,35 @@ import Map from './Map'
 import ItemList from './ItemList'
 
 
+// const Display = this.state.bool ? Map : Results;
 
 class Display extends Component {
-	render() {
-		return (
+	constructor(props) {
+		super(props)
+		this.state = {
+			isMapOn: this.props.isMapOn,
+		}
+	}
+	
 
-			<div className="Display">
-				<h1>Display </h1>
-				<ItemList />
-				<Map/>
-			</div>
-		)
+	render() {
+		if(this.state.isMapOn) {
+			return (
+
+				<div className="Display">
+					<h1>Display Map </h1>
+					<Map/>
+				</div>
+			)
+		} else {
+			return (
+
+				<div className="Display">
+					<h1>Display Item List</h1>
+					<ItemList />
+				</div>
+			)
+		}
 	}
 }
 
