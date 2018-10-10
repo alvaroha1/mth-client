@@ -1,6 +1,6 @@
 import { Component } from 'react'
-import Bulma from 'bulma'
 import * as React from 'react'
+import Bulma from 'bulma'
 import './App.css'
 
 import Navbar from './components/Navbar'
@@ -17,7 +17,6 @@ class App extends Component {
 						<Navbar />
 					</div>
 					<div className="tile is-child box ">
-
 						<div className="tile is-12 is-parent">
 							<div className="Filter tile is-3 is-child box">
 								<SwitchViews/>
