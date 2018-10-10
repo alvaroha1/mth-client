@@ -6,16 +6,19 @@ class SwitchViews extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			mapIsOn: false,
+			isMapOn: false,
 		}
 	}
 
 	mapToggleOn = () => {
-		this.state.mapIsOn = true
+		this.isMapOn = true
+		this.setState(this.isMapOn = true)
+		this.props.mapToggle(this.state.isMapOn)
 	}
 
 	mapToggleOff = () => {
-		this.state.mapIsOn = false
+		this.setState(this.isMapOn = false)
+		this.props.mapToggle(this.state.isMapOn)
 	}
 
 	render() {
@@ -46,7 +49,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  mapToggle: () => dispatch(mapToggle())
+  // mapToggle: () => dispatch(isMapOn)
+	// createHobby: (hobby) => dispatch(createHobby(hobby))
+	mapToggle: (isMapOn) => dispatch(mapToggle(isMapOn))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SwitchViews)

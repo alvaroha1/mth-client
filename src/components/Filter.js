@@ -1,6 +1,26 @@
 import React, { Component } from 'react'
 
 class Filter extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			country:'',
+			city:'',
+			price:'',
+			size:'',
+		}
+	}
+
+	handleSlidersChange = (event) => {
+    const target = event.target;
+    const value = target.value;
+
+    // this.setState({
+    //   [name]: value
+    // });
+    console.log(event);
+  }
+
 	render() {
 		return (
 			<div className="Filter">
@@ -18,7 +38,7 @@ class Filter extends Component {
 							</div>
 						</div>
 						<div className="control">
-							<button type="submit" className="button is-primary">Choose</button>
+							<button name="country" type="submit" className="button is-primary">Choose</button>
 						</div>
 					</div>
 				</div>
@@ -40,12 +60,12 @@ class Filter extends Component {
 
 				<div>
 					<h4><strong>Price</strong></h4>
-					<input className="slider is-fullwidth is-medium" step="1" min="0" max="100" value="50" type="range"></input>
+					<input className="slider is-fullwidth is-medium" step="1" min="0" max="100" value="50" type="range" onChange={this.handleInputChange}></input>
 				</div>
 
 				<div>
 					<h4><strong>Size</strong></h4>
-					<input className="slider is-fullwidth is-medium" step="1" min="0" max="100" value="50" type="range"></input>
+					<input className="slider is-fullwidth is-medium" step="1" min="0" max="100" value="50" type="range" onChange={this.handleInputChange}></input>
 				</div>
 			
 			</div>
