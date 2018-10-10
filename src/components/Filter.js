@@ -38,21 +38,6 @@ class Filter extends Component {
 					</div>
 				</div>
 
-				<div className="City">
-					<h4><strong>City</strong></h4>
-					<div className="field is-grouped is-grouped-multiline">
-						<p className="control">
-							<a className="button">Barcelona</a>
-						</p>
-						<p className="control">
-							<a className="button">Girona</a>
-						</p>
-						<p className="control">
-							<a className="button">Tarragona</a>
-						</p>
-					</div>
-				</div>
-
 				<div>
 					<h4><strong>Price</strong></h4>
 					<input className="slider is-fullwidth is-medium" step="1" min="0" max="100" value="50" type="range" onChange={this.handleInputChange}></input>
