@@ -1,5 +1,6 @@
 const initalState = {
 	isMapOn: false,
+	homes: {}
 }
 
 const reducer = (state = initalState, action) => {
@@ -8,7 +9,13 @@ const reducer = (state = initalState, action) => {
 	case 'MAP_TOGGLE_SUCCESS':
 		return {
 			...state,
-			mapToggle: action.data
+			isMapOn: !state.isMapOn
+		}
+
+	case 'GET_HOMES_SUCCESS':
+		return {
+			...state,
+			homes: action.data
 		}
 		
 	default:
