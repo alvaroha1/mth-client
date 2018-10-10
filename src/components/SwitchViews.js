@@ -49,8 +49,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // mapToggle: () => dispatch(isMapOn)
-	// createHobby: (hobby) => dispatch(createHobby(hobby))
 	mapToggle: (isMapOn) => dispatch(mapToggle(isMapOn))
 });
 

@@ -14,11 +14,6 @@ class Filter extends Component {
 	handleSlidersChange = (event) => {
     const target = event.target;
     const value = target.value;
-
-    // this.setState({
-    //   [name]: value
-    // });
-    console.log(event);
   }
 
 	render() {

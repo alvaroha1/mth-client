@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import Bulma from 'bulma'
 import Map from './Map'
 import ItemList from './ItemList'
 import { connect } from 'react-redux'
@@ -15,7 +14,6 @@ class Display extends Component {
 	
 	getHomesFromDb = async () => {
 		await this.props.getHomesFromDb()
-		// this.setState
 	}
 
 	render() {
@@ -54,17 +52,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Display)
-
-
-
-
-// const mapDispatchToProps = (dispatch) => ({
-//   getHobbiesFromDatabase: () => dispatch({
-//     type: 'DISCOVER',
-//     api: {
-//       endpoint: '/discover'
-//     }
-//   })
-// });
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Discover);
