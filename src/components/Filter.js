@@ -5,15 +5,15 @@ class Filter extends Component {
 		super(props)
 		this.state = {
 			country:'',
-			city:'',
 			price:'',
 			size:'',
 		}
 	}
 
-	handleSlidersChange = (event) => {
-    const target = event.target;
-    const value = target.value;
+	handleSlidersChange = (e) => {
+		console.log(e);
+		// const target = event.target;
+    // const value = target.value;
   }
 
 	render() {
