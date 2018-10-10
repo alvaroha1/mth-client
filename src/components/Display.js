@@ -8,7 +8,7 @@ class Display extends Component {
 		super(props)
 		this.props.getHomesFromDb();
 		this.state = {
-			isMapOn: this.props.isMapOn,
+			homes: this.props.homes.homesList,
 		}
 	}
 	
@@ -31,7 +31,7 @@ class Display extends Component {
 
 				<div className="Display">
 					<h1>Display Item List</h1>
-					<ItemList />
+					<ItemList ItemList = {this.state.homes}/>
 				</div>
 			)
 		}
@@ -39,7 +39,7 @@ class Display extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	mapToggle:state.isMapOn
+	homes: state.homes
 })
 
 const mapDispatchToProps = (dispatch) => ({
