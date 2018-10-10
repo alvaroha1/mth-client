@@ -15,24 +15,25 @@ const home = { thumbnail: 'https://img3.idealista.com/blur/WEB_LISTING/0/id.pro.
    	estimatedPricePercentageDifference: 5,
    	pricePerSquareMeter: 4975 }
 
-class ItemList extends Component {
-	// const listItems = apiData.map(item=>
-	// 		apiData.map(home=>
-	// 		)
-	// <Item {}/>
-	// )
-	render() {
-		return (
-			<div className="ItemList">
-		<Item url={home.url} thumbnail={home.thumbnail} 
-		pricePerSquareMeter={home.pricePerSquareMeter}
-		price={home.price} estimatedPrice={home.estimatedPrice}
-		municipality = {home.municipality}
-		 />
-			</div>
-		)
-	}
+function ItemList({url, thumbnail, pricePerSquareMeter,
+ price, estimatedPrice, municipality}){
+
+	return (
+		<div className="ItemList">
+			{ /* {this.listItems} */}
+		</div>
+	)
+
+	console.log('hello');
+
 }
+
+
+// <Item url={home.url} thumbnail={home.thumbnail} 
+// 		pricePerSquareMeter={home.pricePerSquareMeter}
+// 		price={home.price} estimatedPrice={home.estimatedPrice}
+// 		municipality = {home.municipality}
+// 		 />
 
 export default ItemList
 
