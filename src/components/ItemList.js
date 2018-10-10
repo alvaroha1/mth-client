@@ -5,6 +5,7 @@ class ItemList extends Component {
 	render() {
 		return (
 			<div className="ItemList">
+			{this.props.}
 				<h1>ItemList</h1>
 				<Item />
 				<Item />

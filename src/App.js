@@ -1,6 +1,6 @@
 import { Component } from 'react'
-import Bulma from 'bulma'
 import * as React from 'react'
+import Bulma from 'bulma'
 import './App.css'
 
 import Navbar from './components/Navbar'
