@@ -27,6 +27,7 @@ class ItemList extends Component {
 		<Item url={home.url} thumbnail={home.thumbnail} 
 		pricePerSquareMeter={home.pricePerSquareMeter}
 		price={home.price} estimatedPrice={home.estimatedPrice}
+		municipality = {home.municipality}
 		 />
 			</div>
 		)

@@ -7,15 +7,16 @@ class Item extends Component {
 		return (
 			<a href={this.props.url}>
 			<div className = "tile is-ancestor">
-				<div className="Item">
-					<div className='level'>
-						<div className="image is-128x128 level-left">
-							<img src={`${this.props.thumbnail}`}/>
-							<p>Price per square meter: {this.props.pricePerSquareMeter}</p>
+				  <div className="tile is-5 is-parent">
+						<div className="image level-left">
+						<img src={`${this.props.thumbnail}`}/>
+						</div>
+				</div>
+				<div className="tile is-parent">
+				<h1>Home in {this.props.municipality}</h1>
+	<p>Price per square meter: {this.props.pricePerSquareMeter}</p>
 							<p>Price: {this.props.price}</p>
 							<p>Our Estimated Price: {this.props.estimatedPrice}</p>
-						</div>
-					</div>
 				</div>
 			</div>
 			</a>
