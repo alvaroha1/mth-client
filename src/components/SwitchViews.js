@@ -39,14 +39,13 @@ class SwitchViews extends Component {
 	}
 }
 
-const mapStateToProps = () => ({
-});
+
 
 const mapDispatchToProps = (dispatch) => ({
 	mapToggle: (bool) => dispatch(mapToggle(bool))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SwitchViews)
+export default connect(mapDispatchToProps)(SwitchViews)
 
 
 
