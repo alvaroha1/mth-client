@@ -17,7 +17,7 @@ function Item({url, thumbnail, pricePerSquareMeter,
 							<p>Our Estimated Price: {estimatedPrice}</p>
 				</div>
 			</div>
-			</a>
+		 </a>
 		)
 }
 
