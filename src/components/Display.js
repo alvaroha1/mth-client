@@ -17,7 +17,6 @@ class Display extends Component {
 	}
 
 	render() {
-		{console.log(this.state)}
 		if(this.state.isMapOn) {
 			return (
 
