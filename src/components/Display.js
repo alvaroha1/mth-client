@@ -17,9 +17,8 @@ class Display extends Component {
 	}
 
 	render() {
-		if(this.state.isMapOn) {
+		if(this.props.isMapOn) {
 			return (
-
 				<div className="Display">
 					<h1>Display Map </h1>
 					<Map/>
@@ -27,7 +26,6 @@ class Display extends Component {
 			)
 		} else {
 			return (
-
 				<div className="Display">
 					<h1>Display Item List</h1>
 					<ItemList ItemList = {this.state.homes}/>
@@ -38,7 +36,8 @@ class Display extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	homes: state.homes
+	homes: state.homes,
+	isMapOn: state.isMapOn
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -47,7 +46,7 @@ const mapDispatchToProps = (dispatch) => ({
     api: {
       endpoint: '/homes'
     }
-  })
+	})
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Display)

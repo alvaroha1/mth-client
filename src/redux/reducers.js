@@ -6,10 +6,10 @@ const initalState = {
 const reducer = (state = initalState, action) => {
 	switch (action.type) {
 
-	case 'MAP_TOGGLE_SUCCESS':
+	case 'MAP_TOGGLE':
 		return {
 			...state,
-			isMapOn: !state.isMapOn
+			isMapOn: action.bool
 		}
 
 	case 'GET_HOMES_SUCCESS':

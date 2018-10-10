@@ -1,6 +1,6 @@
 export const mapToggle = data => ({
 	type: 'MAP_TOGGLE',
-	data
+	bool: data
 })
 
 export const GetHomes = apiInfo => ({
