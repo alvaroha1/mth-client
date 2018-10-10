@@ -2,21 +2,23 @@ import React, { Component } from 'react'
 import apiData from '../temp-mockdata'
 import Bulma from 'bulma'
 
-// console.log(apiData.homesList)
-// const image = apiData.homesList
 class Item extends Component {
 	render() {
 		return (
+			<a href={this.props.url}>
 			<div className = "tile is-ancestor">
 				<div className="Item">
 					<div className='level'>
-						<h1>Item</h1>
 						<div className="image is-128x128 level-left">
-							<img src={`${apiData.homesList[0].thumbnail}`}/>
+							<img src={`${this.props.thumbnail}`}/>
+							<p>Price per square meter: {this.props.pricePerSquareMeter}</p>
+							<p>Price: {this.props.price}</p>
+							<p>Our Estimated Price: {this.props.estimatedPrice}</p>
 						</div>
 					</div>
 				</div>
 			</div>
+			</a>
 		)
 	}
 }

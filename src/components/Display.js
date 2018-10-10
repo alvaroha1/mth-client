@@ -10,7 +10,6 @@ class Display extends Component {
 		return (
 
 			<div className="Display">
-				<h1>Display </h1>
 				<ItemList />
 				<Map/>
 			</div>
