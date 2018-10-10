@@ -29,11 +29,12 @@ class Display extends Component {
 		} else {
 			return (
 
-			<div className="Display">
-				<ItemList />
-				<Map/>
-			</div>
-		)
+				<div className="Display">
+					<h1>Display Item List</h1>
+					<ItemList />
+				</div>
+			)
+		}
 	}
 }
 

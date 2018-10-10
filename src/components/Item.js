@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import apiData from '../temp-mockdata'
 import Bulma from 'bulma'
 
 function Item({url, thumbnail, pricePerSquareMeter,
