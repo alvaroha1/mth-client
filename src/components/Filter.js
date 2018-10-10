@@ -5,15 +5,15 @@ class Filter extends Component {
 		super(props)
 		this.state = {
 			country:'',
-			city:'',
 			price:'',
 			size:'',
 		}
 	}
 
-	handleSlidersChange = (event) => {
-    const target = event.target;
-    const value = target.value;
+	handleSlidersChange = (e) => {
+		console.log(e);
+		// const target = event.target;
+    // const value = target.value;
   }
 
 	render() {
@@ -35,21 +35,6 @@ class Filter extends Component {
 						<div className="control">
 							<button name="country" type="submit" className="button is-primary">Choose</button>
 						</div>
-					</div>
-				</div>
-
-				<div className="City">
-					<h4><strong>City</strong></h4>
-					<div className="field is-grouped is-grouped-multiline">
-						<p className="control">
-							<a className="button">Barcelona</a>
-						</p>
-						<p className="control">
-							<a className="button">Girona</a>
-						</p>
-						<p className="control">
-							<a className="button">Tarragona</a>
-						</p>
 					</div>
 				</div>
 

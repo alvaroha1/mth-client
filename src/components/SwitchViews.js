@@ -5,20 +5,14 @@ import { mapToggle } from '../redux/actions';
 class SwitchViews extends Component {
 	constructor(props) {
 		super(props)
-		this.state = {
-			isMapOn: false,
-		}
 	}
 
 	mapToggleOn = () => {
-		this.isMapOn = true
-		this.setState(this.isMapOn = true)
-		this.props.mapToggle(this.state.isMapOn)
+		this.props.mapToggle(true)
 	}
 
 	mapToggleOff = () => {
-		this.setState(this.isMapOn = false)
-		this.props.mapToggle(this.state.isMapOn)
+		this.props.mapToggle(false)
 	}
 
 	render() {
@@ -45,14 +39,11 @@ class SwitchViews extends Component {
 	}
 }
 
-const mapStateToProps = (state) => ({
-});
-
 const mapDispatchToProps = (dispatch) => ({
-	mapToggle: (isMapOn) => dispatch(mapToggle(isMapOn))
+	mapToggle: (bool) => dispatch(mapToggle(bool))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SwitchViews)
+export default connect(null, mapDispatchToProps)(SwitchViews)
 
 
 
