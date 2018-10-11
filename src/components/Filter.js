@@ -39,7 +39,7 @@ class Filter extends Component {
 	setCountry = (value) => {
 		this.setState({country: value})
 		this.getQuery();
-		console.log(value)
+		console.log(this.state)
 	}
 
 	getQuery = () => {
@@ -49,12 +49,12 @@ class Filter extends Component {
 	render() {
 		return (
 			<div className="Filter">
-				<div className="Country">
+				<form>
 					<h4><strong>Country</strong></h4>
 					<div className="field has-addons">
 						<div className="control is-expanded">
 							<div className="select is-fullwidth">
-								<select name="country">
+								<select name="country" onChange={this.setCountry}>
 									<option value="Spain">Spain</option>
 									<option value="Portugal">Portugal</option>
 									<option value="Italy">Italy</option>
@@ -65,7 +65,7 @@ class Filter extends Component {
 							<button name="country" type="submit" onClick={this.setCountry} className="button is-primary">Choose</button>
 						</div>
 					</div>
-				</div>			
+					</form>			
 
 				<h4><strong>Max Price</strong></h4>
 				<div className="slider">
