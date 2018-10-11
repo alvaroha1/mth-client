@@ -1,6 +1,7 @@
 const initalState = {
 	isMapOn: false,
-	homes: {}
+	homes: {},
+	fHomes: {},
 }
 
 const reducer = (state = initalState, action) => {
@@ -17,6 +18,12 @@ const reducer = (state = initalState, action) => {
 			...state,
 			homes: action.data
 		}
+
+	case 'FILTER_HOMES_SUCCESS':
+		return {
+			...state,
+			fHomes: action.data
+		}	
 		
 	default:
 		return state

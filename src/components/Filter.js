@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { debounce } from 'lodash.debounce'
+import { debounce } from 'lodash'
 import Slider, { Range } from 'rc-slider'
 import 'rc-slider/assets/index.css'
 import './Filter.css'
+import qs from 'qs'
 
 const size = {
 	0: <strong>0</strong>,
@@ -25,16 +26,27 @@ class Filter extends Component {
 	}
 
 	setPrice = (value) => {
-		// console.log(value)
 		this.setState({price: value * 1000})
-		console.log(this.state)
+		this.getQuery();
 	}
 
 	setSize = (value) => {
-		// console.log(value)
 		this.setState({size: value})
-		console.log(this.state)
+		this.getQuery();
 	}
+
+	getQuery = () => {
+		const filter = qs.stringify(this.state)
+		console.log(filter);
+	}
+
+	// handlePrice = () => {
+	// 	debounce(this.setPrice, 500)
+	// }
+
+	// handleSize = () => {
+	// 	debounce(this.setSize, 500)
+	// }
 
 	render() {
 		return (
@@ -54,11 +66,16 @@ class Filter extends Component {
 	}
 }
 
-const mapStateToProps = (state) => ({
-	homes: state.homes,
-})
-
 const mapDispatchToProps = (dispatch) => ({
+	filterHomes: () => dispatch({
+		type: 'FILTER_HOMES',
+		method: 'POST',
+    api: {
+      endpoint: '/homes?'+qs.stringify(this.state)
+    }
+	})
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filter)
+export default connect(null, mapDispatchToProps)(Filter)
+
+
