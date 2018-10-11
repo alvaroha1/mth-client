@@ -13,16 +13,16 @@ class App extends Component {
 		return (
 			<div className="tile is-ancestor">
 				<div className="tile is-12 is-vertical is-parent">
-					<div className="NavBar tile is-child box">
+					<div className="NavBar tile is-child">
 						<Navbar />
 					</div>
-					<div className="tile is-child box ">
+					<div className="tile is-child ">
 						<div className="tile is-12 is-parent">
-							<div className="Filter tile is-3 is-child box">
+							<div className="Filter tile is-3 is-child">
 								<SwitchViews/>
 								<Filter />
 							</div>
-							<div className="Display tile is-child box">
+							<div className="Display tile is-child">
 								<Display />
 							</div> 
 						</div>	

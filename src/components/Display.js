@@ -9,7 +9,12 @@ class Display extends Component {
 		this.props.getHomesFromDb();
 		this.state = {
 			homes: this.props.homes.homesList,
+			mapWidth: "10"
 		}
+	}
+	componentDidMount () {
+		console.log(this.mapContainer.offsetWidth);
+		this.setState({mapWidth : this.mapContainer.offsetWidth})
 	}
 	
 	getHomesFromDb = async () => {
@@ -19,8 +24,8 @@ class Display extends Component {
 	render() {
 		if(this.props.isMapOn) {
 			return (
-				<div className="Display">
-					<Map/>
+				<div ref={(r)=>this.mapContainer = r} className="Display">
+					<Map width={this.state.mapWidth} />
 				</div>
 			)
 		} else {
