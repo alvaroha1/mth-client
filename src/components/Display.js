@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 class Display extends Component {
 	constructor(props) {
 		super(props)
-		this.props.getHomesFromDb();
+		this.props.getHomes();
 		this.state = {
 			homes: this.props.homes.homesList,
 		}
@@ -41,7 +41,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getHomesFromDb: () => dispatch({
+  getHomes: () => dispatch({
     type: 'GET_HOMES',
     api: {
       endpoint: '/homes'
