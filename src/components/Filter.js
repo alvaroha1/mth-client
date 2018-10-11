@@ -40,14 +40,6 @@ class Filter extends Component {
 		console.log(filter);
 	}
 
-	// handlePrice = () => {
-	// 	debounce(this.setPrice, 500)
-	// }
-
-	// handleSize = () => {
-	// 	debounce(this.setSize, 500)
-	// }
-
 	render() {
 		return (
 			<div className="Filter">
