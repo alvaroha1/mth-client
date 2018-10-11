@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import Item from './Item'
+import React, { Component } from 'react';
+import Item from './Item';
 
 function ItemList({ItemList}){
 const listItems = ItemList.map((home)=>
