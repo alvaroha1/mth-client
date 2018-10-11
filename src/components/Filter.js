@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { debounce } from 'lodash'
-import Slider, { Range } from 'rc-slider'
-import 'rc-slider/assets/index.css'
-import './Filter.css'
-import qs from 'qs'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { debounce } from 'lodash';
+import Slider, { Range } from 'rc-slider';
+import 'rc-slider/assets/index.css';
+import './Filter.css';
+import qs from 'qs';
 
 const size = {
 	0: <strong>0</strong>,

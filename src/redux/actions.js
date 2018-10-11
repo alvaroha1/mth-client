@@ -1,6 +1,6 @@
 export const mapToggle = data => ({
 	type: 'MAP_TOGGLE',
-	bool: data
+	bool: data,
 })
 
 export const getHomes = apiInfo => ({
@@ -9,7 +9,7 @@ export const getHomes = apiInfo => ({
 		endpoint: apiInfo.endpoint,
 		method: apiInfo.method,
 		body: apiInfo.body,
-		headers: apiInfo.headers
+		headers: apiInfo.headers,
 	}
 })
 
@@ -19,6 +19,6 @@ export const filterHomes = apiInfo => ({
 		endpoint: apiInfo.endpoint,
 		method: apiInfo.method,
 		body: apiInfo.body,
-		headers: apiInfo.headers
+		headers: apiInfo.headers,
 	}
 })

@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import Map from './Map'
-import ItemList from './ItemList'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import Map from './Map';
+import ItemList from './ItemList';
+import { connect } from 'react-redux';
 
 class Display extends Component {
 	constructor(props) {

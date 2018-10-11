@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import Bulma from 'bulma'
+import React, { Component } from 'react';
+import Bulma from 'bulma';
 
 function Item({url, thumbnail, pricePerSquareMeter,
  price, estimatedPrice, municipality}){
