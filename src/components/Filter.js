@@ -6,12 +6,12 @@ import 'rc-slider/assets/index.css';
 import './Filter.css';
 import qs from 'qs';
 
-const size = {
+const sizeFilterMax = {
 	0: <strong>0</strong>,
 	200: <strong>200m</strong>,
 }
 
-const price = {
+const priceFilterMax = {
 	0: <strong>0</strong>,
 	2000: <strong>2MM€</strong>,
 }
@@ -37,7 +37,6 @@ class Filter extends Component {
 
 	getQuery = () => {
 		const filter = qs.stringify(this.state)
-		console.log(filter);
 	}
 
 	render() {
@@ -46,12 +45,22 @@ class Filter extends Component {
 
 				<h4><strong>Max Price</strong></h4>
 				<div className="slider">
-					<Slider min={0} max={2000} marks={price} included={false} defaultValue={1000} onChange={this.setPrice}/>
+					<Slider min={0} 
+									max={2000} 
+									marks={priceFilterMax} 
+									included={false} 
+									defaultValue={1000} 
+									onChange={this.setPrice}/>
 				</div>
 
 				<h4><strong>Max Size</strong></h4>
 				<div className="slider">
-					<Slider min={0} max={200} marks={size} included={false} defaultValue={100} onChange={this.setSize}/>
+					<Slider min={0} 
+									max={200} 
+									marks={sizeFilterMax} 
+									included={false} 
+									defaultValue={100} 
+									onChange={this.setSize}/>
 				</div>
 			</div>
 		)
