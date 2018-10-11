@@ -43,14 +43,6 @@ class Filter extends Component {
 		return (
 			<div className="Filter">
 			
-			<h4><strong>Country:</strong></h4>
-			<div class="select">
-  			<select size="8">
-    			<option value="Spain">Spain</option>
-    			<option value="Italy">Italy</option>
-    			<option value="Portugal">Portugal</option>
-  			</select>
-			</div>
 
 				<h4><strong>Max Price</strong></h4>
 				<div className="slider">
