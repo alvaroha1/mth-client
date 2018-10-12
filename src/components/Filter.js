@@ -48,7 +48,6 @@ class Filter extends Component {
 
 	getQuery = () => {
 		const filter = qs.stringify(this.state)
-		console.log(filter)
 	}
 
 	render() {
