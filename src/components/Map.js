@@ -12,7 +12,6 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoic3RldmVuc3B5cmFtaWQiLCJhIjoiY2puMWl4NDluM3g5a
 
 class Map extends Component {
 	constructor(props){
-		console.log('homesList',props.itemList)
 		super(props)
   this.state = {
     viewport: {
@@ -26,7 +25,6 @@ class Map extends Component {
 	}
 	componentDidUpdate(prevProps) {
 		if(prevProps.width !== this.props.width) {
-console.log('i am triggered!')
 		this.setState({ viewport: {
 			...this.state.viewport,
       width: this.props.width

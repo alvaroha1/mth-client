@@ -29,8 +29,6 @@ class Display extends Component {
 	}
 
 	refreshDisplay = ()=>{
-		    // Force a render with a simulated state change
-				console.log('refresh Display is called')
     this.setState({ state: this.state });
 }	
 	render() {
