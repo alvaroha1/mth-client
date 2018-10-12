@@ -43,56 +43,9 @@ return this.props.refreshDisplay()
   render() {
 		console.log('this.state',this.props.width)
     return (
-      <ReactMapGL
-				mapboxApiAccessToken={'pk.eyJ1Ijoic3RldmVuc3B5cmFtaWQiLCJhIjoiY2puMWl4NDluM3g5aTNwcG56YWVhb293YiJ9.UpzML4DXnrPKkVdvY0IOJQ'}
-        {...this.state.viewport}
-        onViewportChange={(viewport) =>{
-					this.refreshWidth()
-					this.setState({viewport:{
-					...this.state.viewport,
-					width: this.props.width,
-					latitude: viewport.latitude,
-					longitude: viewport.longitude,
-					zoom: viewport.zoom,
-				}})
-				}
-				}
-      >
+      <div>
 				{/* <MarkerList homes={this.props.itemList}/> */}
-				<Marker latitude={this.props.itemList[0].latitude} longitude={this.props.itemList[0].longitude} offsetLeft={-20} offsetTop={-10}>
-          <div className="markerIcon">
-          <FontAwesomeIcon icon="map-marker" />
-          </div>
-        </Marker>
-					<Marker latitude={this.props.itemList[1].latitude} longitude={this.props.itemList[1].longitude} offsetLeft={-20} offsetTop={-10}>
-          <div className="markerIcon">
-          <FontAwesomeIcon icon="map-marker" /></div>
-        </Marker>
-				<Marker latitude={this.props.itemList[2].latitude} longitude={this.props.itemList[2].longitude} offsetLeft={-20} offsetTop={-10}>
-          <div className="markerIcon">
-          <FontAwesomeIcon icon="map-marker" /></div>
-        </Marker>
-					<Marker latitude={this.props.itemList[3].latitude} longitude={this.props.itemList[3].longitude} offsetLeft={-20} offsetTop={-10}>
-          <div className="markerIcon">
-          <FontAwesomeIcon icon="map-marker" /></div>
-        </Marker>
-				<Marker latitude={this.props.itemList[4].latitude} longitude={this.props.itemList[4].longitude} offsetLeft={-20} offsetTop={-10}>
-          <div className="markerIcon">
-          <FontAwesomeIcon icon="map-marker" /></div>
-        </Marker>
-					<Marker latitude={this.props.itemList[5].latitude} longitude={this.props.itemList[5].longitude} offsetLeft={-20} offsetTop={-10}>
-          <div className="markerIcon">
-          <FontAwesomeIcon icon="map-marker" /></div>
-        </Marker>
-					<Marker latitude={this.props.itemList[6].latitude} longitude={this.props.itemList[6].longitude} offsetLeft={-20} offsetTop={-10}>
-          <div className="markerIcon">
-          <FontAwesomeIcon icon="map-marker" /></div>
-        </Marker>
-					<Marker latitude={this.props.itemList[7].latitude} longitude={this.props.itemList[7].longitude} offsetLeft={-20} offsetTop={-10}>
-          <div className="markerIcon">
-          <FontAwesomeIcon icon="map-marker" /></div>
-        </Marker>
-			</ReactMapGL>
+			</div>
     );
   }
 }
