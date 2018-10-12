@@ -24,9 +24,9 @@ class App extends Component {
 							</div>
 							<div className="Display tile is-child">
 								<Display />
-							</div> 
-						</div>	
-					</div>			
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		)

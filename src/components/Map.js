@@ -1,18 +1,26 @@
 import React, { Component } from 'react'
 import ReactMapGL, {Marker} from 'react-map-gl';
+import MarkerList from './MarkerList'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMapMarker } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faMapMarker)
+// import './Map.css'
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 mapboxgl.accessToken = 'pk.eyJ1Ijoic3RldmVuc3B5cmFtaWQiLCJhIjoiY2puMWl4NDluM3g5aTNwcG56YWVhb293YiJ9.UpzML4DXnrPKkVdvY0IOJQ';
 
+
 class Map extends Component {
 	constructor(props){
-		console.log('sdgdsgsdgsdgsdgsd',props)
+		console.log('homesList',props.itemList)
 		super(props)
   this.state = {
     viewport: {
       width: this.props.width,
       height: 400,
-      latitude: 37.7577,
-      longitude: -122.4376,
+      latitude: 40.123,
+      longitude: -3.242,
       zoom: 8
     }
   };
@@ -30,31 +38,11 @@ console.log('i am triggered!')
 refreshWidth = ()=>{
 return this.props.refreshDisplay()
 	}
-// width = this.props.width
-	// componentDidMount () {
-	// 	console.log(this.props.width);
-	// 	this.setState({viewport: {
-	// 		width: this.props.width,
-	// 		heigth:400,
-	// 		 latitude: 37.7577,
-  //     longitude: -122.4376,
-  //     zoom: 8
-	// 	}})
-	// }	
-// refreshWidth = (props)=>{
-// 		if(props.width !== this.props.width) {
-// console.log('i am triggered from refreshWidth!')
-// 		this.setState({ viewport: {
-// 			...this.state.viewport,
-//       width: this.props.width
-//     }})
-// 		}
-// 	}
-// someMethod() {
-//     // Force a render without state change...
-//     this.forceUpdate();
-// 		console.log('force update ran!')
-// }
+
+
+
+
+
   render() {
 		console.log('this.state',this.props.width)
     return (
@@ -62,23 +50,53 @@ return this.props.refreshDisplay()
 				mapboxApiAccessToken={'pk.eyJ1Ijoic3RldmVuc3B5cmFtaWQiLCJhIjoiY2puMWl4NDluM3g5aTNwcG56YWVhb293YiJ9.UpzML4DXnrPKkVdvY0IOJQ'}
         {...this.state.viewport}
         onViewportChange={(viewport) =>{
-this.refreshWidth()
-				this.setState({viewport:{
+					this.refreshWidth()
+					this.setState({viewport:{
 					...this.state.viewport,
 					width: this.props.width,
 					latitude: viewport.latitude,
-					longitude: viewport.longitude,	
-					zoom: viewport.zoom,				
+					longitude: viewport.longitude,
+					zoom: viewport.zoom,
 				}})
 				}
 				}
       >
-				{/* <Marker latitude={37.78} longitude={-122.41} offsetLeft={-20} offsetTop={-10}>
-          <div>You are here</div>
-        </Marker> */}
+				{/* <MarkerList homes={this.props.itemList}/> */}
+				<Marker latitude={this.props.itemList[0].latitude} longitude={this.props.itemList[0].longitude} offsetLeft={-20} offsetTop={-10}>
+          <div className="markerIcon">
+          <FontAwesomeIcon icon="map-marker" />
+          </div>
+        </Marker>
+					<Marker latitude={this.props.itemList[1].latitude} longitude={this.props.itemList[1].longitude} offsetLeft={-20} offsetTop={-10}>
+          <div className="markerIcon">
+          <FontAwesomeIcon icon="map-marker" /></div>
+        </Marker>
+				<Marker latitude={this.props.itemList[2].latitude} longitude={this.props.itemList[2].longitude} offsetLeft={-20} offsetTop={-10}>
+          <div className="markerIcon">
+          <FontAwesomeIcon icon="map-marker" /></div>
+        </Marker>
+					<Marker latitude={this.props.itemList[3].latitude} longitude={this.props.itemList[3].longitude} offsetLeft={-20} offsetTop={-10}>
+          <div className="markerIcon">
+          <FontAwesomeIcon icon="map-marker" /></div>
+        </Marker>
+				<Marker latitude={this.props.itemList[4].latitude} longitude={this.props.itemList[4].longitude} offsetLeft={-20} offsetTop={-10}>
+          <div className="markerIcon">
+          <FontAwesomeIcon icon="map-marker" /></div>
+        </Marker>
+					<Marker latitude={this.props.itemList[5].latitude} longitude={this.props.itemList[5].longitude} offsetLeft={-20} offsetTop={-10}>
+          <div className="markerIcon">
+          <FontAwesomeIcon icon="map-marker" /></div>
+        </Marker>
+					<Marker latitude={this.props.itemList[6].latitude} longitude={this.props.itemList[6].longitude} offsetLeft={-20} offsetTop={-10}>
+          <div className="markerIcon">
+          <FontAwesomeIcon icon="map-marker" /></div>
+        </Marker>
+					<Marker latitude={this.props.itemList[7].latitude} longitude={this.props.itemList[7].longitude} offsetLeft={-20} offsetTop={-10}>
+          <div className="markerIcon">
+          <FontAwesomeIcon icon="map-marker" /></div>
+        </Marker>
 			</ReactMapGL>
     );
   }
 }
 export default Map
-

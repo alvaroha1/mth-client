@@ -3,9 +3,9 @@ import Item from './Item'
 
 function ItemList({ItemList}){
 const listItems = ItemList.map((home)=>
-<Item url={home.url} thumbnail={home.thumbnail} 
+<Item url={home.url} thumbnail={home.thumbnail}
 		pricePerSquareMeter={home.pricePerSquareMeter}
-		price={home.price} estimatedPrice={home.estimatedPrice}
+	   	price={home.price} estimatedPrice={home.estimatedPrice}
 		 />
 
 )
@@ -14,13 +14,7 @@ const listItems = ItemList.map((home)=>
 			{ listItems }
 		</div>
 	)
-
-	console.log('hello');
-
 }
 
 
 export default ItemList
-
-
-
