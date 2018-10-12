@@ -22,50 +22,50 @@ class Filter extends Component {
 		this.state = {
 			price:1000 * 1000,
 			size:100,
-			country:'',
+			country:'Spain',
 		}
+		this.setSize= debounce(this.setSize, 500);
+		this.setPrice= debounce(this.setPrice, 500);
 	}
 
 	setPrice = (value) => {
-		this.setState({price: value * 1000})
-		this.getQuery();
+		this.setState({price: value * 1000}, ()=>{
+			this.getQuery();
+		})
 	}
 
 	setSize = (value) => {
-		this.setState({size: value})
-		this.getQuery();
+		this.setState({size: value}, ()=>{
+			this.getQuery();
+		})
 	}
 
 	setCountry = (value) => {
-		this.setState({country: value})
-		this.getQuery();
-		console.log(this.state)
+		this.setState({country: value.target.value}, ()=>{
+			this.getQuery();
+		})
 	}
 
 	getQuery = () => {
 		const filter = qs.stringify(this.state)
+		console.log(filter)
 	}
 
 	render() {
 		return (
 			<div className="Filter">
-				<form>
 					<h4><strong>Country</strong></h4>
 					<div className="field has-addons">
 						<div className="control is-expanded">
-							<div className="select is-fullwidth">
+							<div className="select is-fullwidth is-dark">
 								<select name="country" onChange={this.setCountry}>
-									<option value="Spain">Spain</option>
+									<option name="country" value="Spain">Spain</option>
 									<option value="Portugal">Portugal</option>
 									<option value="Italy">Italy</option>
 								</select>
 							</div>
 						</div>
-						<div className="control">
-							<button name="country" type="submit" onClick={this.setCountry} className="button is-primary">Choose</button>
-						</div>
 					</div>
-					</form>			
 
 				<h4><strong>Max Price</strong></h4>
 				<div className="slider">
