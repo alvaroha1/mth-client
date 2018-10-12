@@ -58,7 +58,7 @@ class Filter extends Component {
 						<div className="control is-expanded">
 							<div className="select is-fullwidth is-dark">
 								<select name="country" onChange={this.setCountry}>
-									<option name="country" value="Spain">Spain</option>
+									<option value="Spain">Spain</option>
 									<option value="Portugal">Portugal</option>
 									<option value="Italy">Italy</option>
 								</select>
