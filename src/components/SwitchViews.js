@@ -18,7 +18,7 @@ class SwitchViews extends Component {
 	render() {
 		return (
 		<div className="SwitchViews">
-		  <div className="tabs is-toggle is-fullwidth">
+		  <div className="tabs is-toggle is-fullwidth is-dark">
 		    <ul>
 		      <li className="is-active">
 		        <a onClick={()=> this.mapToggleOff()}>
