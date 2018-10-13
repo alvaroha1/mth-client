@@ -16,11 +16,11 @@ class App extends Component {
 					<div className="NavBar tile is-child">
 						<Navbar />
 					</div>
-					<div className="tile is-child ">
+				    	<div className="tile is-child ">
 						<div className="tile is-12 is-parent">
 							<div className="Filter tile is-3 is-child">
 								<SwitchViews/>
-								<Filter />
+								  <Filter />
 							</div>
 							<div className="Display tile is-child">
 								<Display />
