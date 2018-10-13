@@ -23,7 +23,7 @@ class SwitchViews extends Component {
 		      <li className="is-active">
 		        <a onClick={()=> this.mapToggleOff()}>
 		          <span className="icon is-small"><i className="fas fa-home" aria-hidden="true"></i></span>
-		          <span>Homes</span>
+		          <span>List</span>
 		        </a>
 		      </li>
 		      <li>
