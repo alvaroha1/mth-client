@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import ReactMapGL, {Marker} from 'react-map-gl';
+import ReactMapGL, {Marker} from 'react-map-gl'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarker } from '@fortawesome/free-solid-svg-icons'
-
+import L from 'leaflet'
+import Icon from './Icon'
 library.add(faMapMarker)
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 mapboxgl.accessToken = 'pk.eyJ1Ijoic3RldmVuc3B5cmFtaWQiLCJhIjoiY2puMWl4NDluM3g5aTNwcG56YWVhb293YiJ9.UpzML4DXnrPKkVdvY0IOJQ';
-
 
 class Map extends Component {
 	constructor(props){
@@ -39,8 +39,8 @@ return this.props.refreshDisplay()
   render() {
     const list = this.state.itemList.map((home)=>
 	  <Marker latitude={home.latitude} longitude={home.longitude} offsetLeft={-20} offsetTop={-10}>
-<FontAwesomeIcon icon="map-marker" />
-	  </ Marker>
+<Icon url={home.url} deviation={home.estimatedPricePercentageDifference}/>
+  	</Marker>
 	)
     return (
 			<ReactMapGL
@@ -62,6 +62,5 @@ return this.props.refreshDisplay()
   </ReactMapGL>
     );
   }
-  // }
 }
 export default Map
