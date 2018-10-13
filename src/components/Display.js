@@ -12,8 +12,8 @@ class Display extends Component {
 		}
 	}
 	
-	getHomesFromDb = async () => {
-		await this.props.getHomesFromDb()
+	getHomes = async () => {
+		await this.props.getHomes()
 	}
 
 	render() {
