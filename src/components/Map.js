@@ -39,7 +39,8 @@ return this.props.refreshDisplay()
   render() {
     const list = this.state.itemList.map((home)=>
 	  <Marker latitude={home.latitude} longitude={home.longitude} offsetLeft={-20} offsetTop={-10}>
-<Icon url={home.url} deviation={home.estimatedPricePercentageDifference}/>
+<Icon thumbnail={home.thumbnail} url={home.url} deviation={home.estimatedPricePercentageDifference}/>
+
   	</Marker>
 	)
     return (
