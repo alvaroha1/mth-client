@@ -6,41 +6,54 @@ import 'rc-slider/assets/index.css';
 import './Filter.css';
 import qs from 'qs';
 
-const sizeFilterMax = {
+const discountMax = {
 	0: <strong>0</strong>,
-	50: <strong>50</strong>,
-	100: <strong>100</strong>,
-	150: <strong>150</strong>,
+	100: <strong>+100%</strong>,
+}
+
+const sizeRange = {
+	0: <strong>0</strong>,
+	100: 100,
 	200: <strong>200m</strong>,
 }
 
-const priceFilterMax = {
+const priceRange = {
 	0: <strong>0</strong>,
-	500: <strong>0.5</strong>,
-	1000: <strong>1</strong>,
-	1500: <strong>1.5</strong>,
+	1000: 1,
 	2000: <strong>2MM€</strong>,
 }
+const initialDiscount = 0;
+const initialPrice = [0,2000000];
+const initialSize = [0,200];
+const initialCountry = 'es';
 
 class Filter extends Component {
 	constructor(props) {
 		super(props)
 		
 		this.state = {
-			price:1000 * 1000,
-			size:100,
-			country:'Spain',
+			discount: initialDiscount,
+			price: initialPrice,
+			size: initialSize,
+			country: initialCountry,
 		}
-		this.setSize= debounce(this.setSize, 500);
-		this.setPrice= debounce(this.setPrice, 500);
+		this.setDiscount = debounce(this.setDiscount, 500);
+		this.setSize = debounce(this.setSize, 500);
+		this.setPrice = debounce(this.setPrice, 500);
 	}
 
 	getFilterHomes = async () => {
 		await this.props.getFilterHomes()
 	}
 
+	setDiscount = (value) => {
+		this.setState({discount: value}, ()=>{
+			this.getQuery();
+		})
+	}
+
 	setPrice = (value) => {
-		this.setState({price: value * 1000}, ()=>{
+		this.setState({price: value}, ()=>{
 			this.getQuery();
 		})
 	}
@@ -59,7 +72,7 @@ class Filter extends Component {
 
 	getQuery = () => {
 		const filter = qs.stringify(this.state)
-		this.props.filterHomes();
+		this.props.filterHomes(filter);
 		console.log(filter);
 	}
 
@@ -88,15 +101,31 @@ class Filter extends Component {
 
 			<article className="message">
   			<div className="message-header">
-				<h4><strong>Max Price</strong></h4>
+				<h4><strong>Discount(%)</strong></h4>
   			</div>
   			<div className="message-body">
 				<div className="slider">
 					<Slider min={0} 
-									max={2000} 
-									marks={priceFilterMax} 
+									max={100} 
+									marks={discountMax} 
+									included={false} 
+									defaultValue={0} 
+									onAfterChange={this.setDiscount}/>
+				</div>
+  			</div>
+			</article>	
+
+			<article className="message">
+  			<div className="message-header">
+				<h4><strong>Price</strong></h4>
+  			</div>
+  			<div className="message-body">
+				<div className="slider">
+					<Range min={0} 
+									max={2000000} 
+									marks={priceRange} 
 									included={false}
-									defaultValue={1000} 
+									defaultValue={[0,2000000]} 
 									onAfterChange={this.setPrice}/>
 				</div>
   			</div>
@@ -104,15 +133,15 @@ class Filter extends Component {
 
 			<article className="message">
   			<div className="message-header">
-				<h4><strong>Max Size</strong></h4>
+				<h4><strong>Size</strong></h4>
   			</div>
   			<div className="message-body">
 				<div className="slider">
-					<Slider min={0} 
+					<Range min={0} 
 									max={200} 
-									marks={sizeFilterMax} 
+									marks={sizeRange} 
 									included={false} 
-									defaultValue={100} 
+									defaultValue={[0,200]} 
 									onAfterChange={this.setSize}/>
 				</div>
   			</div>
@@ -121,19 +150,16 @@ class Filter extends Component {
 		)
 	}
 }
-const mapStateToProps = (state) => ({
-	// filterHomes: state.homes,
-})
 
 const mapDispatchToProps = (dispatch) => ({
-	filterHomes: () => dispatch({
+	filterHomes: (filter) => dispatch({
 		type: 'FILTER_HOMES',
     api: {
-      endpoint: '/homes?'+this.filter
+      endpoint: '/homes?'+filter
     }
 	})
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filter)
+export default connect(null, mapDispatchToProps)(Filter)
 
 
