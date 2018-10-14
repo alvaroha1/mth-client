@@ -22,24 +22,52 @@ const priceRange = {
 	1000000: 1,
 	2000000: <strong>2MM€</strong>,
 }
-const initialDiscount = 0;
-const initialPrice = [0,2000000];
-const initialSize = [0,200];
-const initialCountry = 'es';
+
+const initialState = {
+	discount : 0,
+	price : [0,2000000],
+	size : [0,200],
+	country : 'es',
+}
+
+const sliderDiscountSetup = {
+	min: 0,
+	max: 100,
+	step: 10,
+	included: false,
+	defaultValue: 0,
+}	
+
+const rangePriceSetup = {
+	min: 0,
+	max: 2000000,
+	step: 100000,
+	included: false,
+	defaultValue: [0,2000000],
+	allowCross: false,
+}
+
+const rangeSizeSetup = {
+	min: 0,
+	max: 200,
+	step: 10,
+	included: false,
+	defaultValue: [0,200],
+	allowCross: false,
+}
 
 class Filter extends Component {
 	constructor(props) {
 		super(props)
-		
 		this.state = {
-			discount: initialDiscount,
-			price: initialPrice,
-			size: initialSize,
-			country: initialCountry,
+			discount: initialState.discount,
+			price: initialState.price,
+			size: initialState.size,
+			country: initialState.country,
 		}
-		this.setDiscount = debounce(this.setDiscount, 500);
-		this.setSize = debounce(this.setSize, 500);
-		this.setPrice = debounce(this.setPrice, 500);
+	this.setDiscount = debounce(this.setDiscount, 500);
+	this.setSize = debounce(this.setSize, 500);
+	this.setPrice = debounce(this.setPrice, 500);
 	}
 
 	getFilterHomes = async () => {
@@ -73,7 +101,6 @@ class Filter extends Component {
 	getQuery = () => {
 		const filter = qs.stringify(this.state)
 		this.props.filterHomes(filter);
-		console.log(filter);
 	}
 
 	render() {
@@ -86,7 +113,7 @@ class Filter extends Component {
   			</div>
   			<div className="message-body">
 				<div className="field has-addons">
-						<div className="control is-expanded">
+					<div className="control is-expanded">
 							<div className="select is-fullwidth is-dark">
 								<select name="country" onChange={this.setCountry}>
 									<option value="es">Spain</option>
@@ -105,11 +132,11 @@ class Filter extends Component {
   			</div>
   			<div className="message-body">
 				<div className="slider">
-					<Slider min={0} 
-									max={100} 
+					<Slider min={sliderDiscountSetup.min} 
+									max={sliderDiscountSetup.max} 
 									marks={discountMax} 
-									included={false} 
-									defaultValue={0} 
+									included={sliderDiscountSetup.included} 
+									defaultValue={sliderDiscountSetup.defaultValue} 
 									onAfterChange={this.setDiscount}/>
 				</div>
   			</div>
@@ -121,13 +148,13 @@ class Filter extends Component {
   			</div>
   			<div className="message-body">
 				<div className="slider">
-					<Range min={0} 
-									max={2000000} 
+					<Range min={rangePriceSetup.min} 
+									max={rangePriceSetup.max} 
 									marks={priceRange} 
-									step={100000}
-									included={false}
-									defaultValue={[0,2000000]} 
-									allowCross={false}
+									step={rangePriceSetup.step}
+									included={rangePriceSetup.included}
+									defaultValue={rangePriceSetup.defaultValue} 
+									allowCross={rangePriceSetup.allowCross}
 									onChange={this.setPrice}/>
 				</div>
   			</div>
@@ -139,13 +166,13 @@ class Filter extends Component {
   			</div>
   			<div className="message-body">
 				<div className="slider">
-					<Range min={0} 
-									max={200} 
-									step={10}
+					<Range min={rangeSizeSetup.min} 
+									max={rangeSizeSetup.max} 
+									step={rangeSizeSetup.step}
 									marks={sizeRange} 
-									included={false} 
-									defaultValue={[0,200]} 
-									allowCross={false}
+									included={rangeSizeSetup.included} 
+									defaultValue={rangeSizeSetup.defaultValue} 
+									allowCross={rangeSizeSetup.allowCross}
 									onChange={this.setSize}/>
 				</div>
   			</div>
