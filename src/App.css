@@ -1,10 +1,19 @@
 .Filter {
-	border: 2px solid green;			
+	background-color: hsl(0, 0%, 96%);
 }
 
 .Display {
-	border: 2px solid blue;			
+	background-color: hsl(0, 0%, 96%);
 }
+
+.NavBar {
+	background-color: hsl(0, 0%, 96%);
+}
+
+.tile {
+	background-color: hsl(0, 0%, 96%);
+}
+
 
 
 
