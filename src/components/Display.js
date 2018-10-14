@@ -20,14 +20,12 @@ class Display extends Component {
 		if(this.props.isMapOn) {
 			return (
 				<div className="Display">
-					<h1>Display Map </h1>
 					<Map/>
 				</div>
 			)
 		} else {
 			return (
 				<div className="Display">
-					<h1>Display Item List</h1>
 					<ItemList ItemList = {this.state.homes}/>
 				</div>
 			)
