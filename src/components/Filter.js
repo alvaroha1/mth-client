@@ -19,8 +19,8 @@ const sizeRange = {
 
 const priceRange = {
 	0: <strong>0</strong>,
-	1000: 1,
-	2000: <strong>2MM€</strong>,
+	1000000: 1,
+	2000000: <strong>2MM€</strong>,
 }
 const initialDiscount = 0;
 const initialPrice = [0,2000000];
@@ -124,9 +124,11 @@ class Filter extends Component {
 					<Range min={0} 
 									max={2000000} 
 									marks={priceRange} 
+									step={100000}
 									included={false}
 									defaultValue={[0,2000000]} 
-									onAfterChange={this.setPrice}/>
+									allowCross={false}
+									onChange={this.setPrice}/>
 				</div>
   			</div>
 			</article>
@@ -139,10 +141,12 @@ class Filter extends Component {
 				<div className="slider">
 					<Range min={0} 
 									max={200} 
+									step={10}
 									marks={sizeRange} 
 									included={false} 
 									defaultValue={[0,200]} 
-									onAfterChange={this.setSize}/>
+									allowCross={false}
+									onChange={this.setSize}/>
 				</div>
   			</div>
 			</article>	
@@ -161,5 +165,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(null, mapDispatchToProps)(Filter)
-
-
