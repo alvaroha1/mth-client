@@ -19,7 +19,6 @@ class Display extends Component {
 
 	componentDidMount () {
 		window.addEventListener("resize", this.resize);
-		console.log('width from display: ', this.mapContainer.offsetWidth);
 		this.setState({mapWidth : this.mapContainer.offsetWidth})
 	}
 
@@ -32,7 +31,6 @@ class Display extends Component {
     this.setState({ state: this.state });
 }	
 	render() {
-		console.log('in render', this.state.mapWidth)
 		if(this.props.isMapOn) {
 			return (
 				<div ref={(r)=>this.mapContainer = r} className="Display">
