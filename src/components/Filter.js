@@ -131,8 +131,6 @@ class Filter extends Component {
 	getQuery = () => {
 		const filter = qs.stringify(this.state)
 		this.props.filterHomes(filter);
-		console.log(filter);
-		console.log(this.state);
 	}
 
 	render() {
