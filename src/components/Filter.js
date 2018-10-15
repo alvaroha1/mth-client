@@ -6,30 +6,82 @@ import 'rc-slider/assets/index.css';
 import './Filter.css';
 import qs from 'qs';
 
-const sizeFilterMax = {
+const discountMax = {
 	0: <strong>0</strong>,
+	100: <strong>+100%</strong>,
+}
+
+const sizeRange = {
+	0: <strong>0</strong>,
+	100: 100,
 	200: <strong>200m</strong>,
 }
 
-const priceFilterMax = {
+const priceRange = {
 	0: <strong>0</strong>,
-	2000: <strong>2MM€</strong>,
+	1000000: 1,
+	2000000: <strong>2MM€</strong>,
+}
+
+const initialState = {
+	discount : 0,
+	price : [0,2000000],
+	size : [0,200],
+	country : 'es',
+}
+
+const sliderDiscountSetup = {
+	min: 0,
+	max: 100,
+	step: 10,
+	included: false,
+	defaultValue: 0,
+}	
+
+const rangePriceSetup = {
+	min: 0,
+	max: 2000000,
+	step: 100000,
+	included: false,
+	defaultValue: [0,2000000],
+	allowCross: false,
+}
+
+const rangeSizeSetup = {
+	min: 0,
+	max: 200,
+	step: 10,
+	included: false,
+	defaultValue: [0,200],
+	allowCross: false,
 }
 
 class Filter extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			price:1000 * 1000,
-			size:100,
-			country:'Spain',
+			discount: initialState.discount,
+			price: initialState.price,
+			size: initialState.size,
+			country: initialState.country,
 		}
-		this.setSize= debounce(this.setSize, 500);
-		this.setPrice= debounce(this.setPrice, 500);
+	this.setDiscount = debounce(this.setDiscount, 500);
+	this.setSize = debounce(this.setSize, 500);
+	this.setPrice = debounce(this.setPrice, 500);
+	}
+
+	getFilterHomes = async () => {
+		await this.props.getFilterHomes()
+	}
+
+	setDiscount = (value) => {
+		this.setState({discount: value}, ()=>{
+			this.getQuery();
+		})
 	}
 
 	setPrice = (value) => {
-		this.setState({price: value * 1000}, ()=>{
+		this.setState({price: value}, ()=>{
 			this.getQuery();
 		})
 	}
@@ -41,65 +93,102 @@ class Filter extends Component {
 	}
 
 	setCountry = (value) => {
-		this.setState({country: value.target.value}, ()=>{
+		this.setState({country: value.target.value.value}, ()=>{
 			this.getQuery();
 		})
 	}
 
 	getQuery = () => {
 		const filter = qs.stringify(this.state)
+		this.props.filterHomes(filter);
 	}
 
 	render() {
 		return (
 			<div className="Filter">
-					<h4><strong>Country</strong></h4>
-					<div className="field has-addons">
-						<div className="control is-expanded">
+			
+			<article className="message">
+  			<div className="message-header">
+				<h4><strong>Country</strong></h4>
+  			</div>
+  			<div className="message-body">
+				<div className="field has-addons">
+					<div className="control is-expanded">
 							<div className="select is-fullwidth is-dark">
 								<select name="country" onChange={this.setCountry}>
-									<option value="Spain">Spain</option>
-									<option value="Portugal">Portugal</option>
-									<option value="Italy">Italy</option>
+									<option value="es">Spain</option>
+									<option value="pt">Portugal</option>
+									<option value="it">Italy</option>
 								</select>
 							</div>
 						</div>
 					</div>
+  			</div>
+			</article>
 
-				<h4><strong>Max Price</strong></h4>
+			<article className="message">
+  			<div className="message-header">
+				<h4><strong>Discount(%)</strong></h4>
+  			</div>
+  			<div className="message-body">
 				<div className="slider">
-					<Slider min={0} 
-									max={2000} 
-									marks={priceFilterMax} 
-									included={false} 
-									defaultValue={1000} 
+					<Slider min={sliderDiscountSetup.min} 
+									max={sliderDiscountSetup.max} 
+									marks={discountMax} 
+									included={sliderDiscountSetup.included} 
+									defaultValue={sliderDiscountSetup.defaultValue} 
+									onAfterChange={this.setDiscount}/>
+				</div>
+  			</div>
+			</article>	
+
+			<article className="message">
+  			<div className="message-header">
+				<h4><strong>Price</strong></h4>
+  			</div>
+  			<div className="message-body">
+				<div className="slider">
+					<Range min={rangePriceSetup.min} 
+									max={rangePriceSetup.max} 
+									marks={priceRange} 
+									step={rangePriceSetup.step}
+									included={rangePriceSetup.included}
+									defaultValue={rangePriceSetup.defaultValue} 
+									allowCross={rangePriceSetup.allowCross}
 									onChange={this.setPrice}/>
 				</div>
+  			</div>
+			</article>
 
-				<h4><strong>Max Size</strong></h4>
+			<article className="message">
+  			<div className="message-header">
+				<h4><strong>Size</strong></h4>
+  			</div>
+  			<div className="message-body">
 				<div className="slider">
-					<Slider min={0} 
-									max={200} 
-									marks={sizeFilterMax} 
-									included={false} 
-									defaultValue={100} 
+					<Range min={rangeSizeSetup.min} 
+									max={rangeSizeSetup.max} 
+									step={rangeSizeSetup.step}
+									marks={sizeRange} 
+									included={rangeSizeSetup.included} 
+									defaultValue={rangeSizeSetup.defaultValue} 
+									allowCross={rangeSizeSetup.allowCross}
 									onChange={this.setSize}/>
 				</div>
+  			</div>
+			</article>	
 			</div>
 		)
 	}
 }
 
 const mapDispatchToProps = (dispatch) => ({
-	filterHomes: () => dispatch({
+	filterHomes: (filter) => dispatch({
 		type: 'FILTER_HOMES',
-		method: 'POST',
     api: {
-      endpoint: '/homes?'+qs.stringify(this.state)
+      endpoint: '/homes?'+filter
     }
 	})
 });
 
 export default connect(null, mapDispatchToProps)(Filter)
-
-
