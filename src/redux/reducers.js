@@ -3,7 +3,9 @@ const initalState = {
 	homes: {
 		homesList: []
 	},
-	filteredHomes: {},
+	filteredHomes: {
+		homesList: []
+	},
 }
 
 const reducer = (state = initalState, action) => {
