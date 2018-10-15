@@ -1,6 +1,8 @@
 const initalState = {
 	isMapOn: false,
-	homes: {},
+	homes: {
+		homesList: []
+	},
 	filteredHomes: {},
 }
 

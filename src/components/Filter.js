@@ -40,7 +40,7 @@ const initialState = {
 	price : [0,2000000],
 	size : [0,200],
 	country : 'es',
-	estimatedPriceRange : [0,2000000],
+	estimatedPrice : [0,2000000],
 	pricePerSquareMeter : [0,20000],
 }
 
@@ -96,7 +96,7 @@ class Filter extends Component {
 			price: initialState.price,
 			size: initialState.size,
 			country: initialState.country,
-			estimatedPriceRange: initialState.estimatedPriceRange,
+			estimatedPrice: initialState.estimatedPrice,
 			pricePerSquareMeter: initialState.pricePerSquareMeter,
 		}
 	this.setDiscount = debounce(this.setDiscount, 500);
@@ -135,13 +135,13 @@ class Filter extends Component {
 	}
 
 	setEstimatedPrice = (value) => {
-		this.setState({EstimatedPriceRange: value}, ()=>{
+		this.setState({estimatedPriceRange: value}, ()=>{
 			this.getQuery();
 		})
 	}
 
 	setPricePerSquareMeter = (value) => {
-		this.setState({PricePerSquareMeter: value}, ()=>{
+		this.setState({pricePerSquareMeter: value}, ()=>{
 			this.getQuery();
 		})
 	}
