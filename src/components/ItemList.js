@@ -1,5 +1,6 @@
 import React from 'react'
 import Item from './Item'
+import Bulma, {tile} from 'bulma'
 
 function ItemList({itemList}){
 	const listItems = itemList.map((home)=>(
@@ -10,7 +11,7 @@ function ItemList({itemList}){
 	)
 	)
 	return (
-		<div className="ItemList">
+		<div className="ItemList tile is-vertical is-parent">
 			{ listItems }
 		</div>
 	)
