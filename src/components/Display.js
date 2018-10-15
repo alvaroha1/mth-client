@@ -30,11 +30,10 @@ class Display extends Component {
     this.setState({ state: this.state });
 }	
 	render() {
-		console.log('hey', this.props.homes.list);
 		if(this.props.isMapOn) {
 			return (
 				<div ref={(r)=>this.mapContainer = r} className="Display">
-					<Map width={this.state.mapWidth} refreshDisplay={this.refreshDisplay} itemList = {this.props.homes.list}/>
+					<Map width={this.state.mapWidth} refreshDisplay={this.refreshDisplay} itemList = {this.props.homes.homesList}/>
 				</div>
 			)
 		} else {
@@ -42,7 +41,7 @@ class Display extends Component {
 
 				<div ref={(r)=>this.mapContainer = r} className="Display">
 					<h1>Display Item List</h1>
-					<ItemList itemList = {this.props.homes.list}/>
+					<ItemList itemList = {this.props.homes.homesList}/>
 				</div>
 			)
 		}
