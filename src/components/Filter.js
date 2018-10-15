@@ -39,9 +39,8 @@ const initialState = {
 	discount : 0,
 	price : [0,2000000],
 	size : [0,200],
-	country : 'es',
+	country : "es",
 	estimatedPrice : [0,2000000],
-	pricePerSquareMeter : [0,20000],
 }
 
 const sliderDiscountSetup = {
@@ -70,21 +69,12 @@ const rangeSizeSetup = {
 	allowCross: false,
 }
 
-const rangeEstimatedPriceRangeSetup = {
+const rangeEstimatedPriceSetup = {
 	min: 0,
 	max: 2000000,
 	step: 100000,
 	included: false,
 	defaultValue: [0,2000000],
-	allowCross: false,
-}
-
-const rangePricePerSquareMeterSetup = {
-	min: 0,
-	max: 20000,
-	step: 1000,
-	included: false,
-	defaultValue: [0,20000],
 	allowCross: false,
 }
 
@@ -97,13 +87,11 @@ class Filter extends Component {
 			size: initialState.size,
 			country: initialState.country,
 			estimatedPrice: initialState.estimatedPrice,
-			pricePerSquareMeter: initialState.pricePerSquareMeter,
 		}
 	this.setDiscount = debounce(this.setDiscount, 500);
 	this.setSize = debounce(this.setSize, 500);
 	this.setPrice = debounce(this.setPrice, 500);
 	this.setEstimatedPriceRange = debounce(this.setEstimatedPrice, 500);
-	this.setPricePerSquareMeter = debounce(this.setPricePerSquareMeter, 500);
 	}
 
 	getFilterHomes = async () => {
@@ -129,19 +117,13 @@ class Filter extends Component {
 	}
 
 	setCountry = (value) => {
-		this.setState({country: value.target.value.value}, ()=>{
+		this.setState({country: value.target.value}, ()=>{
 			this.getQuery();
 		})
 	}
 
 	setEstimatedPrice = (value) => {
-		this.setState({estimatedPriceRange: value}, ()=>{
-			this.getQuery();
-		})
-	}
-
-	setPricePerSquareMeter = (value) => {
-		this.setState({pricePerSquareMeter: value}, ()=>{
+		this.setState({estimatedPrice: value}, ()=>{
 			this.getQuery();
 		})
 	}
@@ -149,6 +131,8 @@ class Filter extends Component {
 	getQuery = () => {
 		const filter = qs.stringify(this.state)
 		this.props.filterHomes(filter);
+		console.log(filter);
+		console.log(this.state);
 	}
 
 	render() {
@@ -236,33 +220,14 @@ class Filter extends Component {
   			<div className="message-body">
 				<div className="slider">
 					<Range 
-						min={rangeEstimatedPriceRangeSetup.min} 
-						max={rangeEstimatedPriceRangeSetup.max} 
-						step={rangeEstimatedPriceRangeSetup.step}
+						min={rangeEstimatedPriceSetup.min} 
+						max={rangeEstimatedPriceSetup.max} 
+						step={rangeEstimatedPriceSetup.step}
 						marks={estimatedPriceRange} 
-						included={rangeEstimatedPriceRangeSetup.included} 
-						defaultValue={rangeEstimatedPriceRangeSetup.defaultValue} 
-						allowCross={rangeEstimatedPriceRangeSetup.allowCross}
+						included={rangeEstimatedPriceSetup.included} 
+						defaultValue={rangeEstimatedPriceSetup.defaultValue} 
+						allowCross={rangeEstimatedPriceSetup.allowCross}
 						onChange={this.setEstimatedPrice}/>
-				</div>
-  			</div>
-			</article>	
-
-			<article className="message is-link">
-  			<div className="message-header">
-				<h4><strong>Price Per Square Meter</strong></h4>
-  			</div>
-  			<div className="message-body">
-				<div className="slider">
-					<Range 
-						min={rangePricePerSquareMeterSetup.min} 
-						max={rangePricePerSquareMeterSetup.max} 
-						step={rangePricePerSquareMeterSetup.step}
-						marks={pricePerSquareMeterRange} 
-						included={rangeSizeSetup.included} 
-						defaultValue={rangePricePerSquareMeterSetup.defaultValue} 
-						allowCross={rangePricePerSquareMeterSetup.allowCross}
-						onChange={this.setPricePerSquareMeter}/>
 				</div>
   			</div>
 			</article>	
@@ -281,3 +246,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(null, mapDispatchToProps)(Filter)
+
+
+
