@@ -41,6 +41,7 @@ class Display extends Component {
 			)
 		} else {
 			return (
+
 				<div ref={(r)=>this.mapContainer = r} className="Display">
 					<h1>Display Item List</h1>
 					<ItemList itemList = {this.state.homes}/>
