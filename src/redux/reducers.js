@@ -1,7 +1,11 @@
 const initalState = {
 	isMapOn: false,
-	homes: {},
-	filteredHomes: {},
+	homes: {
+		homesList: []
+	},
+	filteredHomes: {
+		homesList: []
+	},
 }
 
 const reducer = (state = initalState, action) => {

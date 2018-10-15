@@ -8,7 +8,6 @@ class Display extends Component {
 		super(props)
 		this.props.getHomes();
 		this.state = {
-			homes: this.props.homes.homesList,
 			mapWidth: 300
 		}
 	}
@@ -19,7 +18,6 @@ class Display extends Component {
 
 	componentDidMount () {
 		window.addEventListener("resize", this.resize);
-		console.log('width from display: ', this.mapContainer.offsetWidth);
 		this.setState({mapWidth : this.mapContainer.offsetWidth})
 	}
 
@@ -32,11 +30,10 @@ class Display extends Component {
     this.setState({ state: this.state });
 }	
 	render() {
-		console.log('in render', this.state.mapWidth)
 		if(this.props.isMapOn) {
 			return (
 				<div ref={(r)=>this.mapContainer = r} className="Display">
-					<Map width={this.state.mapWidth} refreshDisplay={this.refreshDisplay} itemList = {this.state.homes}/>
+					<Map width={this.state.mapWidth} refreshDisplay={this.refreshDisplay} itemList = {this.props.homes.homesList}/>
 				</div>
 			)
 		} else {
@@ -44,7 +41,7 @@ class Display extends Component {
 
 				<div ref={(r)=>this.mapContainer = r} className="Display">
 					<h1>Display Item List</h1>
-					<ItemList itemList = {this.state.homes}/>
+					<ItemList itemList = {this.props.homes.homesList}/>
 				</div>
 			)
 		}
