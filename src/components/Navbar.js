@@ -31,7 +31,7 @@ class Navbar extends Component {
 										Team
 									</a>
 									<a href="/" className="navbar-item">
-										ContactUs
+										Contact Us
 									</a>
 								</div>
 							</div>
