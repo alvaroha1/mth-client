@@ -14,7 +14,9 @@
 	background-color: hsl(0, 0%, 96%);
 }
 
-
+.item {
+	border: 2px solid purple;			
+}
 
 
 

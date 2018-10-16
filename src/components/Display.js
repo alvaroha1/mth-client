@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Bulma from 'bulma'
 import Map from './Map';
 import ItemList from './ItemList';
 import { connect } from 'react-redux';
@@ -39,8 +40,7 @@ class Display extends Component {
 		} else {
 			return (
 
-				<div ref={(r)=>this.mapContainer = r} className="Display">
-					<h1>Display Item List</h1>
+				<div ref={(r)=>this.mapContainer = r} className="Display tile is-parent">
 					<ItemList itemList = {this.props.homes.homesList}/>
 				</div>
 			)
