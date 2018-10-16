@@ -11,21 +11,17 @@ import SwitchViews from './components/SwitchViews'
 class App extends Component {
 	render() {
 		return (
-			<div className="tile is-ancestor">
-				<div className="tile is-12 is-vertical is-parent">
-					<div className="NavBar tile is-child">
-						<Navbar />
+			<div>
+				<div className="NavBar">
+					<Navbar />
+				</div>
+				    	<div className="tile is-parent">
+					<div className="tile is-4 is-child">
+						<SwitchViews/>
+						<Filter/>
 					</div>
-			   	<div className="tile is-child ">
-						<div className="tile is-12 is-parent">
-							<div className="Filter tile is-3 is-child">
-								<SwitchViews/>
-								  <Filter />
-							</div>
-							<div className="Display tile is-child">
-								<Display />
-							</div>
-						</div>
+					<div className="tile is-child">
+						<Display />
 					</div>
 				</div>
 			</div>

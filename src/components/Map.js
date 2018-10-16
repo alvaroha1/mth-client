@@ -40,7 +40,6 @@ return this.props.refreshDisplay()
     const list = this.state.itemList.map((home)=>
 	  <Marker latitude={home.latitude} longitude={home.longitude} offsetLeft={-20} offsetTop={-10}>
 <Icon thumbnail={home.thumbnail} url={home.url} deviation={home.estimatedPricePercentageDifference}/>
-
   	</Marker>
 	)
     return (
