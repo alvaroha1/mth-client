@@ -23,11 +23,24 @@ const priceRange = {
 	2000000: <strong>2MM€</strong>,
 }
 
+const estimatedPriceRange = {
+	0: <strong>0</strong>,
+	1000000: 1,
+	2000000: <strong>2MM€</strong>,
+}
+
+const pricePerSquareMeterRange = {
+	0: <strong>0</strong>,
+	10000: 10,
+	20000: <strong>20K€</strong>,
+}
+
 const initialState = {
 	discount : 0,
 	price : [0,2000000],
 	size : [0,200],
-	country : 'es',
+	country : "es",
+	estimatedPrice : [0,2000000],
 }
 
 const sliderDiscountSetup = {
@@ -56,6 +69,15 @@ const rangeSizeSetup = {
 	allowCross: false,
 }
 
+const rangeEstimatedPriceSetup = {
+	min: 0,
+	max: 2000000,
+	step: 100000,
+	included: false,
+	defaultValue: [0,2000000],
+	allowCross: false,
+}
+
 class Filter extends Component {
 	constructor(props) {
 		super(props)
@@ -64,10 +86,12 @@ class Filter extends Component {
 			price: initialState.price,
 			size: initialState.size,
 			country: initialState.country,
+			estimatedPrice: initialState.estimatedPrice,
 		}
 	this.setDiscount = debounce(this.setDiscount, 500);
 	this.setSize = debounce(this.setSize, 500);
 	this.setPrice = debounce(this.setPrice, 500);
+	this.setEstimatedPriceRange = debounce(this.setEstimatedPrice, 500);
 	}
 
 	getFilterHomes = async () => {
@@ -93,7 +117,13 @@ class Filter extends Component {
 	}
 
 	setCountry = (value) => {
-		this.setState({country: value.target.value.value}, ()=>{
+		this.setState({country: value.target.value}, ()=>{
+			this.getQuery();
+		})
+	}
+
+	setEstimatedPrice = (value) => {
+		this.setState({estimatedPrice: value}, ()=>{
 			this.getQuery();
 		})
 	}
@@ -107,14 +137,14 @@ class Filter extends Component {
 		return (
 			<div className="Filter">
 			
-			<article className="message">
+			<article className="message is-link">
   			<div className="message-header">
 				<h4><strong>Country</strong></h4>
   			</div>
   			<div className="message-body">
 				<div className="field has-addons">
 					<div className="control is-expanded">
-							<div className="select is-fullwidth is-dark">
+							<div className="select is-fullwidth is-link">
 								<select name="country" onChange={this.setCountry}>
 									<option value="es">Spain</option>
 									<option value="pt">Portugal</option>
@@ -126,54 +156,76 @@ class Filter extends Component {
   			</div>
 			</article>
 
-			<article className="message">
+			<article className="message is-link">
   			<div className="message-header">
 				<h4><strong>Discount(%)</strong></h4>
   			</div>
   			<div className="message-body">
 				<div className="slider">
-					<Slider min={sliderDiscountSetup.min} 
-									max={sliderDiscountSetup.max} 
-									marks={discountMax} 
-									included={sliderDiscountSetup.included} 
-									defaultValue={sliderDiscountSetup.defaultValue} 
-									onAfterChange={this.setDiscount}/>
+					<Slider 
+						min={sliderDiscountSetup.min} 
+						max={sliderDiscountSetup.max} 
+						marks={discountMax} 
+						included={sliderDiscountSetup.included} 
+						defaultValue={sliderDiscountSetup.defaultValue} 
+						onAfterChange={this.setDiscount}/>
 				</div>
   			</div>
 			</article>	
 
-			<article className="message">
+			<article className="message is-link">
   			<div className="message-header">
 				<h4><strong>Price</strong></h4>
   			</div>
   			<div className="message-body">
 				<div className="slider">
-					<Range min={rangePriceSetup.min} 
-									max={rangePriceSetup.max} 
-									marks={priceRange} 
-									step={rangePriceSetup.step}
-									included={rangePriceSetup.included}
-									defaultValue={rangePriceSetup.defaultValue} 
-									allowCross={rangePriceSetup.allowCross}
-									onChange={this.setPrice}/>
+					<Range 
+						min={rangePriceSetup.min} 
+						max={rangePriceSetup.max} 
+						marks={priceRange} 
+						step={rangePriceSetup.step}
+						included={rangePriceSetup.included}
+						defaultValue={rangePriceSetup.defaultValue} 
+						allowCross={rangePriceSetup.allowCross}
+						onChange={this.setPrice}/>
 				</div>
   			</div>
 			</article>
 
-			<article className="message">
+			<article className="message is-link">
   			<div className="message-header">
 				<h4><strong>Size</strong></h4>
   			</div>
   			<div className="message-body">
 				<div className="slider">
-					<Range min={rangeSizeSetup.min} 
-									max={rangeSizeSetup.max} 
-									step={rangeSizeSetup.step}
-									marks={sizeRange} 
-									included={rangeSizeSetup.included} 
-									defaultValue={rangeSizeSetup.defaultValue} 
-									allowCross={rangeSizeSetup.allowCross}
-									onChange={this.setSize}/>
+					<Range 
+						min={rangeSizeSetup.min} 
+						max={rangeSizeSetup.max} 
+						step={rangeSizeSetup.step}
+						marks={sizeRange} 
+						included={rangeSizeSetup.included} 
+						defaultValue={rangeSizeSetup.defaultValue} 
+						allowCross={rangeSizeSetup.allowCross}
+						onChange={this.setSize}/>
+				</div>
+  			</div>
+			</article>	
+
+			<article className="message is-link">
+  			<div className="message-header">
+				<h4><strong>Estimated Price</strong></h4>
+  			</div>
+  			<div className="message-body">
+				<div className="slider">
+					<Range 
+						min={rangeEstimatedPriceSetup.min} 
+						max={rangeEstimatedPriceSetup.max} 
+						step={rangeEstimatedPriceSetup.step}
+						marks={estimatedPriceRange} 
+						included={rangeEstimatedPriceSetup.included} 
+						defaultValue={rangeEstimatedPriceSetup.defaultValue} 
+						allowCross={rangeEstimatedPriceSetup.allowCross}
+						onChange={this.setEstimatedPrice}/>
 				</div>
   			</div>
 			</article>	
@@ -192,3 +244,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(null, mapDispatchToProps)(Filter)
+
+
+
