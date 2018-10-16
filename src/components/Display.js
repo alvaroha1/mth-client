@@ -49,7 +49,7 @@ class Display extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	homes: state.homes,
+	homes: state.filteredHomes,
 	isMapOn: state.isMapOn
 })
 
