@@ -29,12 +29,6 @@ const estimatedPriceRange = {
 	2000000: <strong>2MM€</strong>,
 }
 
-const pricePerSquareMeterRange = {
-	0: <strong>0</strong>,
-	10000: 10,
-	20000: <strong>20K€</strong>,
-}
-
 const initialState = {
 	discount : 0,
 	price : [0,2000000],
