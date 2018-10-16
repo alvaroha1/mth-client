@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarker } from '@fortawesome/free-solid-svg-icons'
 import L from 'leaflet'
 import Icon from './Icon'
+import Bulma from 'bulma'
 library.add(faMapMarker)
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 mapboxgl.accessToken = 'pk.eyJ1Ijoic3RldmVuc3B5cmFtaWQiLCJhIjoiY2puMWl4NDluM3g5aTNwcG56YWVhb293YiJ9.UpzML4DXnrPKkVdvY0IOJQ';
@@ -17,9 +18,9 @@ class Map extends Component {
     viewport: {
       width: this.props.width,
       height: 400,
-      latitude: 40.123,
-      longitude: -3.242,
-      zoom: 8
+      latitude: 41.37959,
+      longitude: 2.16836,
+      zoom: 12
     }
   };
 	}
@@ -39,8 +40,11 @@ return this.props.refreshDisplay()
   render() {
     const list = this.state.itemList.map((home)=>
 	  <Marker latitude={home.latitude} longitude={home.longitude} offsetLeft={-20} offsetTop={-10}>
-<Icon thumbnail={home.thumbnail} url={home.url} deviation={home.estimatedPricePercentageDifference}/>
-  	</Marker>
+{/* <Icon thumbnail={home.thumbnail} url={home.url} deviation={home.estimatedPricePercentageDifference}/> */}
+			<span class="tag is-success">
+  {home.estimatedPricePercentageDifference}
+</span>
+		</Marker>
 	)
     return (
 			<ReactMapGL

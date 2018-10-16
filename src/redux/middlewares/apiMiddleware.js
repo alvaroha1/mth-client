@@ -1,5 +1,5 @@
-const BASE_URL = 'http://localhost:3001'
-
+// const BASE_URL = 'http://localhost:3001'
+const BASE_URL = 'http://private-f13e38-mthapiary.apiary-mock.com'
 export default store => next => action => {
 	if (!action.api) return next(action)
 
