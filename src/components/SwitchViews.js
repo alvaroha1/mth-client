@@ -20,7 +20,7 @@ class SwitchViews extends Component {
 		<div className="SwitchViews">
 		  <div className="tabs is-toggle is-fullwidth is-dark">
 		    <ul>
-		      <li className="is-active">
+		      <li>
 						<a onClick={()=> this.mapToggleOff()}>
 		          <span className=""><i className="fas fa-home" aria-hidden="true"></i></span>
 		          <span>List</span>
