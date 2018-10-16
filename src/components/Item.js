@@ -15,16 +15,16 @@ function Item({url, thumbnail, pricePerSquareMeter,
 				</div>
 				<div className="tile is-parent">
 					<div className="tile is-child is-12">
-						<article className="message is-info">
+						<article className="message is-small is-fullwidth is-warning">
 							<div className="message-header">
-								<p>{price}</p>
+								<p>€{price}</p>
 							</div>
 							<div className="columns message-body">
 								<div className="column">
 									{size} m²
 								</div>
 								<div className="column">
-									Our Estimation: {estimatedPrice}
+									Our Estimation: €{estimatedPrice}
 								</div>
 							</div>
 						</article>
