@@ -22,7 +22,6 @@ class Display extends Component {
 		this.setState({mapWidth : this.mapContainer.offsetWidth})
 	}
 
-
 	getHomesFromDb = async () => {
 		await this.props.getHomesFromDb()
 	}
@@ -39,8 +38,7 @@ class Display extends Component {
 			)
 		} else {
 			return (
-
-				<div ref={(r)=>this.mapContainer = r} className="Display tile is-parent">
+				<div ref={(r)=>this.mapContainer = r} className="Display">
 					<ItemList itemList = {this.props.homes.homesList}/>
 				</div>
 			)

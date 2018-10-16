@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Bulma from 'bulma'
 import { connect } from 'react-redux';
 import { debounce } from 'lodash';
 import Slider, { Range } from 'rc-slider';
@@ -136,7 +137,6 @@ class Filter extends Component {
 	render() {
 		return (
 			<div className="Filter">
-			
 			<article className="message is-link">
   			<div className="message-header">
 				<h4><strong>Country</strong></h4>
