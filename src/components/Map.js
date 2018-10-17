@@ -4,28 +4,6 @@ import './Map.css'
 
 const accessToken = 'pk.eyJ1Ijoic3RldmVuc3B5cmFtaWQiLCJhIjoiY2puMWl4NDluM3g5aTNwcG56YWVhb293YiJ9.UpzML4DXnrPKkVdvY0IOJQ'
 
-const zoomToRadiusConversion = {
-	20 : 1128.497220,
-	19 : 2256.994440,
-	18 : 4513.988880,
-	17 : 9027.977761,
-	16 : 18055.955520,
-	15 : 36111.911040,
-	14 : 72223.822090,
-	13 : 144447.644200,
-	12 : 288895.288400,
-	11 : 577790.576700,
-	10 : 1155581.153000,
-	9  : 2311162.307000,
-	8  : 4622324.614000,
-	7  : 9244649.227000,
-	6  : 18489298.450000,
-	5  : 36978596.910000,
-	4  : 73957193.820000,
-	3  : 147914387.600000,
-	2  : 295828775.300000,
-	1  : 591657550.500000}
-
 class Map extends Component {
 	constructor(props){
 		super(props)
@@ -35,7 +13,7 @@ class Map extends Component {
 				height: this.props.widthAndHeight,
 				latitude: this.props.itemsAndMapInfo.centerLatitude,
 				longitude: this.props.itemsAndMapInfo.centerLongitude,
-				zoom: 12
+				zoom: Math.log2(156543.03/(this.props.itemsAndMapInfo.radius/(this.props.widthAndHeight/2)))
 			}
 		}
 	}
@@ -53,7 +31,7 @@ class Map extends Component {
 	}
 
 	render() {
-		console.log('this is the state form map.js: ',this.state)
+		console.log('this is the state from map.js: ',this.state)
 		const positiveNegative = (num)=>num>0 ? 'success' : 'danger'
 		const list = this.props.itemsAndMapInfo.homesList.map((home, i)=>{
 			return(
