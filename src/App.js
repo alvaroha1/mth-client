@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import * as React from 'react'
+import 'mapbox-gl/dist/mapbox-gl.css'
 import Bulma from 'bulma'
 import './App.css'
 
@@ -15,7 +16,7 @@ class App extends Component {
 				<div className="NavBar">
 					<Navbar />
 				</div>
-				    	<div className="tile is-parent">
+				<div className="tile is-parent">
 					<div className="tile is-4 is-child">
 						<SwitchViews/>
 						<Filter/>
