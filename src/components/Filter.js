@@ -7,7 +7,8 @@ import './Filter.css';
 import qs from 'qs';
 
 const discountMax = {
-	0: <strong>0</strong>,
+	'-100': <strong>-100%</strong>,
+	0: 0,
 	100: <strong>+100%</strong>,
 }
 
@@ -30,15 +31,16 @@ const estimatedPriceRange = {
 }
 
 const initialState = {
-	discount : 0,
+	estimatedPricePercentageDifference : 0,
 	price : [0,2000000],
 	size : [0,200],
-	country : "es",
+	country : null,
+	city : null,
 	estimatedPrice : [0,2000000],
 }
 
 const sliderDiscountSetup = {
-	min: 0,
+	min: -100,
 	max: 100,
 	step: 10,
 	included: false,
@@ -76,13 +78,14 @@ class Filter extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			discount: initialState.discount,
+			estimatedPricePercentageDifference: initialState.estimatedPricePercentageDifference,
 			price: initialState.price,
 			size: initialState.size,
 			country: initialState.country,
+			city: initialState.city,
 			estimatedPrice: initialState.estimatedPrice,
 		}
-	this.setDiscount = debounce(this.setDiscount, 500);
+	this.setEstimatedPricePercentageDifference = debounce(this.setEstimatedPricePercentageDifference, 500);
 	this.setSize = debounce(this.setSize, 500);
 	this.setPrice = debounce(this.setPrice, 500);
 	this.setEstimatedPriceRange = debounce(this.setEstimatedPrice, 500);
@@ -92,8 +95,8 @@ class Filter extends Component {
 		await this.props.getFilterHomes()
 	}
 
-	setDiscount = (value) => {
-		this.setState({discount: value}, ()=>{
+	setEstimatedPricePercentageDifference = (value) => {
+		this.setState({estimatedPricePercentageDifference: value}, ()=>{
 			this.getQuery();
 		})
 	}
@@ -116,6 +119,13 @@ class Filter extends Component {
 		})
 	}
 
+	setCity = (value) => {
+		console.log(value.target.value);
+		this.setState({city: value.target.value}, ()=>{
+			this.getQuery();
+		})
+	}
+
 	setEstimatedPrice = (value) => {
 		this.setState({estimatedPrice: value}, ()=>{
 			this.getQuery();
@@ -125,30 +135,116 @@ class Filter extends Component {
 	getQuery = () => {
 		const filter = qs.stringify(this.state)
 		this.props.filterHomes(filter);
+		console.log(filter);
 	}
 
-	render() {
+	renderCountrySelector = () => {
 		return (
-			<div className="Filter">
-			
-			<article className="message is-link">
-  			<div className="message-header">
-				<h4><strong>Country</strong></h4>
-  			</div>
+			<select name="country" onChange={this.setCountry}>
+				<option >Select one</option>
+				<option value="es">Spain</option>
+				<option value="fr">France</option>
+				<option value="it">Italy</option>
+			</select>
+		)
+	}
+
+	renderCitySelector = () => {
+		if(!this.state.country) return null;
+		if(this.state.country === "es") {
+			return (
+				<article className="message is-link">
+  				<div className="message-header">
+					<h4><strong>City</strong></h4>
+  				</div>
   			<div className="message-body">
-				<div className="field has-addons">
-					<div className="control is-expanded">
+					<div className="field has-addons">
+						<div className="control is-expanded">
 							<div className="select is-fullwidth is-link">
-								<select name="country" onChange={this.setCountry}>
-									<option value="es">Spain</option>
-									<option value="pt">Portugal</option>
-									<option value="it">Italy</option>
+								<select name="city" onChange={this.setCity}>
+									<option >Select one</option>
+									<option value="barcelona">Barcelona</option>
+									<option value="valencia">Valencia</option>
+									<option value="murcia">Murcia</option>
+									<option value="malaga">Malaga</option>
+									<option value="palma-de-mallorca">Palma de Mallorca</option>
 								</select>
 							</div>
 						</div>
 					</div>
   			</div>
 			</article>
+			)
+		} else if (this.state.country === "it") {
+			return (
+				<article className="message is-link">
+  				<div className="message-header">
+					<h4><strong>City</strong></h4>
+  				</div>
+  				<div className="message-body">
+						<div className="field has-addons">
+							<div className="control is-expanded">
+								<div className="select is-fullwidth is-link">
+									<select name="city" onChange={this.setCity}>
+										<option >Select one</option>
+										<option value="roma">Roma</option>
+										<option value="genova">Genova</option>
+										<option value="naples">Naples</option>
+										<option value="palermo">Palermo</option>
+										<option value="cagliari">Cagliari</option>
+									</select>
+								</div>
+							</div>
+						</div>
+  				</div>
+				</article>
+			)
+		} else if (this.state.country === "fr") {
+			return (
+				<article className="message is-link">
+  				<div className="message-header">
+					<h4><strong>City</strong></h4>
+  				</div>
+  				<div className="message-body">
+						<div className="field has-addons">
+							<div className="control is-expanded">
+								<div className="select is-fullwidth is-link">
+									<select name="city" onChange={this.setCity}>
+										<option >Select one</option>
+										<option value="ajaccio">Ajaccio</option>
+										<option value="marseille">Marseille</option>
+										<option value="nice">Nice</option>
+										<option value="cannes">Cannes</option>
+										<option value="montpellier">Montpellier</option>
+									</select>
+								</div>
+							</div>
+						</div>
+  				</div>
+				</article>
+			)
+		}
+	}
+
+	render() {
+		return (
+			<div className="Filter">
+			<article className="message is-link">
+  			<div className="message-header">
+				<h4><strong>Country</strong></h4>
+  			</div>
+  			<div className="message-body">
+					<div className="field has-addons">
+						<div className="control is-expanded">
+							<div className="select is-fullwidth is-link">
+								{this.renderCountrySelector()}
+							</div>
+						</div>
+					</div>
+  			</div>
+			</article>
+			
+			{this.renderCitySelector()}
 
 			<article className="message is-link">
   			<div className="message-header">
@@ -162,7 +258,7 @@ class Filter extends Component {
 						marks={discountMax} 
 						included={sliderDiscountSetup.included} 
 						defaultValue={sliderDiscountSetup.defaultValue} 
-						onAfterChange={this.setDiscount}/>
+						onAfterChange={this.setEstimatedPricePercentageDifference}/>
 				</div>
   			</div>
 			</article>	
@@ -238,6 +334,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(null, mapDispatchToProps)(Filter)
+
 
 
 
