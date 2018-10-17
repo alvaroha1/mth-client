@@ -14,14 +14,14 @@ class Navbar extends Component {
 					<div id="navbarBasicExample" className="navbar-menu">
 						<div className="navbar-start">
 							<a href="/" className="navbar-item">
-								Home
+								<strong>Home</strong>
 							</a>
 							<a href="/" className="navbar-item">
-								Rates
+								<strong>Rates</strong>
 							</a>
 							<div className="navbar-item has-dropdown is-hoverable">
 								<a href="/" className="navbar-link">
-									About Us
+									<strong>About Us</strong>
 								</a>
 								<div className="navbar-dropdown">
 									<a href="/" className="navbar-item">
