@@ -16,7 +16,7 @@ class App extends Component {
 					<Navbar />
 				</div>
 				    	<div className="tile is-parent">
-					<div className="tile is-4 is-child">
+					<div className="tile is-4 is-child impala">
 						<SwitchViews/>
 						<Filter/>
 					</div>
