@@ -11,12 +11,15 @@ function ItemList({itemList}){
 			pricePerSquareMeter={home.pricePerSquareMeter}
 			price={home.price} 
 			estimatedPrice={home.estimatedPrice}
+			size={home.size}
 		/>
 	))
 
 	return (
-		<div className="ItemList tile is-vertical is-parent">
-			{ listItems }
+		<div className="tile is-ancestor">
+			<div className="ItemList tile is-vertical is-parent">
+				{ listItems }
+			</div>
 		</div>
 	)
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Bulma from 'bulma'
 import { connect } from 'react-redux';
 import { debounce } from 'lodash';
 import Slider, { Range } from 'rc-slider';
