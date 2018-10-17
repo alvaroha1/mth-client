@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { mapToggle } from '../redux/actions';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMapMarkedAlt, faListUl } from '@fortawesome/free-solid-svg-icons'
+import './SwitchViews.css'
+
+
+library.add(faMapMarkedAlt, faListUl)
+
+
 
 class SwitchViews extends Component {
 	constructor(props) {
@@ -20,16 +29,17 @@ class SwitchViews extends Component {
 		<div className="SwitchViews">
 		  <div className="tabs is-toggle is-fullwidth is-dark">
 		    <ul>
-		      <li className="is-active">
+		      <li>
 						<a onClick={()=> this.mapToggleOff()}>
-		          <span className=""><i className="fas fa-home" aria-hidden="true"></i></span>
-		          <span>List</span>
+						
+		          <span className="element"><FontAwesomeIcon icon="list-ul" /></span>
+		          <strong><span className="element">List</span></strong>
 		        </a>
 		      </li>
 		      <li>
 		        <a onClick={()=> this.mapToggleOn()}>
-		          <span className="icon is-small"><i className="fas fa-map-marker-alt" aria-hidden="true"></i></span>
-		          <span>Map</span>
+		          <span className="element"><FontAwesomeIcon icon="map-marked-alt" /></span>
+		          <strong><span className="element">Map</span></strong>
 		        </a>
 		      </li>
 		    </ul>

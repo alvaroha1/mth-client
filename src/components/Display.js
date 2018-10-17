@@ -53,7 +53,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getHomes: () => dispatch({
-    type: 'GET_HOMES',
+    type: 'FILTER_HOMES',
     api: {
       endpoint: '/homes'
     }
