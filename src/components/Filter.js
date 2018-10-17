@@ -122,12 +122,8 @@ class Filter extends Component {
 	getQuery = () => {
 		const filter = qs.stringify(this.state)
 		this.props.filterHomes(filter);
+		console.log(filter);
 	}
-
-	// cityForMapInfo(){
-	// 	mapInfo.find(city => this.state.city === city).latitude;
-	// 	mapInfo.find(city => this.state.city === city).longitude;
-	// }
 
 	renderCountrySelector = () => {
 		return (
