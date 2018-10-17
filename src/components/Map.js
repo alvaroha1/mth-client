@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactMapGL, {Marker} from 'react-map-gl'
+import './Map.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faMapMarker } from '@fortawesome/free-solid-svg-icons'
 library.add(faMapMarker)
@@ -10,7 +11,6 @@ class Map extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			itemList : this.props.itemList,
 			viewport: {
 				width: this.props.width,
 				height: 400,
@@ -29,17 +29,26 @@ class Map extends Component {
 		}
 	}
 
+
 	refreshWidth () {
 		return this.props.refreshDisplay()
 	}
 
 	render() {
-		const list = this.state.itemList.map((home, i)=>{
+		// const popup = <a href={url}>
+		const list = this.props.itemList.map((home, i)=>{
 			if(home.estimatedPricePercentageDifference>0){
 				return(
 					<Marker key={i} latitude={home.latitude} longitude={home.longitude}>
 						<span className="tag is-success">
-							{home.estimatedPricePercentageDifference}%
+							<div className="tooltip">
+								{home.estimatedPricePercentageDifference}%
+								<span className="tooltiptext">
+									<a href={home.url}>	
+										<img src={home.thumbnail}/>
+									</a>		
+								</span>
+							</div>
 						</span>
 					</Marker>
 				)
@@ -48,7 +57,14 @@ class Map extends Component {
 				return(
 					<Marker key={i} latitude={home.latitude} longitude={home.longitude}>
 						<span className="tag is-danger">
-							{home.estimatedPricePercentageDifference}%
+							<div className="tooltip">
+								{home.estimatedPricePercentageDifference}%
+								<span className="tooltiptext">
+									<a href={home.url}>	
+										<img className="img" src={home.thumbnail}/>
+									</a>							
+								</span>
+							</div>
 						</span>
 					</Marker>
 				)
