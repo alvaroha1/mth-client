@@ -7,6 +7,8 @@ import 'rc-slider/assets/index.css';
 import './Filter.css';
 import qs from 'qs';
 
+const mapInfo = require('./mapInfo.json');
+
 const discountMax = {
 	'-50': <strong>-50%</strong>,
 	0: 0,
@@ -25,19 +27,12 @@ const priceRange = {
 	2000000: <strong>2MM€</strong>,
 }
 
-const estimatedPriceRange = {
-	0: <strong>0</strong>,
-	1000000: 1,
-	2000000: <strong>2MM€</strong>,
-}
-
 const initialState = {
 	estimatedPricePercentageDifference : 0,
 	price : [0,2000000],
 	size : [0,200],
 	country : null,
 	city : null,
-	estimatedPrice : [0,2000000],
 }
 
 const sliderDiscountSetup = {
@@ -66,15 +61,6 @@ const rangeSizeSetup = {
 	allowCross: false,
 }
 
-const rangeEstimatedPriceSetup = {
-	min: 0,
-	max: 2000000,
-	step: 100000,
-	included: false,
-	defaultValue: [0,2000000],
-	allowCross: false,
-}
-
 class Filter extends Component {
 	constructor(props) {
 		super(props)
@@ -84,12 +70,14 @@ class Filter extends Component {
 			size: initialState.size,
 			country: initialState.country,
 			city: initialState.city,
-			estimatedPrice: initialState.estimatedPrice,
+			centerLatitude: null,
+			centerLongitude: null,
+			radius: 50000,
+			page: 1,
 		}
 	this.setEstimatedPricePercentageDifference = debounce(this.setEstimatedPricePercentageDifference, 500);
 	this.setSize = debounce(this.setSize, 500);
 	this.setPrice = debounce(this.setPrice, 500);
-	this.setEstimatedPriceRange = debounce(this.setEstimatedPrice, 500);
 	}
 
 	getFilterHomes = async () => {
@@ -121,14 +109,12 @@ class Filter extends Component {
 	}
 
 	setCity = (value) => {
-		console.log(value.target.value);
-		this.setState({city: value.target.value}, ()=>{
-			this.getQuery();
-		})
-	}
-
-	setEstimatedPrice = (value) => {
-		this.setState({estimatedPrice: value}, ()=>{
+		const { name, latitude, longitude } = mapInfo.mapInfo.filter(obj => obj.name === value.target.value )[0];
+		this.setState({
+			city: name,
+			centerLatitude: latitude,
+			centerLongitude: longitude,
+		}, () => {
 			this.getQuery();
 		})
 	}
@@ -136,7 +122,6 @@ class Filter extends Component {
 	getQuery = () => {
 		const filter = qs.stringify(this.state)
 		this.props.filterHomes(filter);
-		console.log(filter);
 	}
 
 	renderCountrySelector = () => {
@@ -302,24 +287,6 @@ class Filter extends Component {
   			</div>
 			</article>	
 
-			<article className="message is-link">
-  			<div className="message-header">
-				<h4><strong>Estimated Price</strong></h4>
-  			</div>
-  			<div className="message-body">
-				<div className="slider">
-					<Range 
-						min={rangeEstimatedPriceSetup.min} 
-						max={rangeEstimatedPriceSetup.max} 
-						step={rangeEstimatedPriceSetup.step}
-						marks={estimatedPriceRange} 
-						included={rangeEstimatedPriceSetup.included} 
-						defaultValue={rangeEstimatedPriceSetup.defaultValue} 
-						allowCross={rangeEstimatedPriceSetup.allowCross}
-						onChange={this.setEstimatedPrice}/>
-				</div>
-  			</div>
-			</article>	
 			</div>
 		)
 	}
