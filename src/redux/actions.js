@@ -22,3 +22,8 @@ export const filterHomes = apiInfo => ({
 		headers: apiInfo.headers,
 	}
 })
+
+export const queryParameters = data => ({
+	type: 'UPDATE_QUERY_PARAMETERS',
+	qp: data,
+})

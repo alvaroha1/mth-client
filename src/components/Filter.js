@@ -6,7 +6,7 @@ import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import './Filter.css';
 import qs from 'qs';
-
+import { queryParameters } from '../redux/actions';
 const mapInfo = require('./mapInfo.json');
 
 const discountMax = {
@@ -122,6 +122,8 @@ class Filter extends Component {
 	getQuery = () => {
 		const filter = qs.stringify(this.state)
 		this.props.filterHomes(filter);
+		const qp = this.state;
+		this.props.queryParameters(qp);
 	}
 
 	renderCountrySelector = () => {
@@ -292,16 +294,23 @@ class Filter extends Component {
 	}
 }
 
+const mapStateToProps = (state) => ({
+	homes: state.filteredHomes,
+	queryParameters: state.queryParameters
+})
+
 const mapDispatchToProps = (dispatch) => ({
 	filterHomes: (filter) => dispatch({
 		type: 'FILTER_HOMES',
     api: {
       endpoint: '/homes?'+filter
     }
-	})
+	}),
+	queryParameters: (qp) => dispatch(queryParameters(qp))
+
 });
 
-export default connect(null, mapDispatchToProps)(Filter)
+export default connect(mapStateToProps, mapDispatchToProps)(Filter)
 
 
 
