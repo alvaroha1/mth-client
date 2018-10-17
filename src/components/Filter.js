@@ -70,9 +70,10 @@ class Filter extends Component {
 			size: initialState.size,
 			country: initialState.country,
 			city: initialState.city,
-			latitude: null,
-			longitude: null,
+			centerLatitude: null,
+			centerLongitude: null,
 			radius: 50000,
+			page: 1,
 		}
 	this.setEstimatedPricePercentageDifference = debounce(this.setEstimatedPricePercentageDifference, 500);
 	this.setSize = debounce(this.setSize, 500);
@@ -108,18 +109,19 @@ class Filter extends Component {
 	}
 
 	setCity = (value) => {
-		console.log(value.target.value);
-		this.setState({city: value.target.value}, ()=>{
+		const { name, latitude, longitude } = mapInfo.mapInfo.filter(obj => obj.name === value.target.value )[0];
+		this.setState({
+			city: name,
+			centerLatitude: latitude,
+			centerLongitude: longitude,
+		}, () => {
 			this.getQuery();
-		// mapInfo.find(city => this.state.city === city).latitude;
-		// mapInfo.find(city => this.state.city === city).longitude;
 		})
 	}
 
 	getQuery = () => {
 		const filter = qs.stringify(this.state)
 		this.props.filterHomes(filter);
-		console.log(mapInfo);
 	}
 
 	// cityForMapInfo(){
