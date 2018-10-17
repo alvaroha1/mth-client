@@ -9,17 +9,17 @@ class Display extends Component {
 		super(props)
 		this.props.getHomes();
 		this.state = {
-			mapWidth: 300
+			mapWidthAndHeight: 300
 		}
 	}
 
 	resize = () => {
-		this.setState({ mapWidth: this.mapContainer.offsetWidth })
+		this.setState({ mapWidthAndHeight: this.mapContainer.offsetWidth })
 	}
 
 	componentDidMount () {
 		window.addEventListener("resize", this.resize);
-		this.setState({mapWidth : this.mapContainer.offsetWidth})
+		this.setState({mapWidthAndHeight : this.mapContainer.offsetWidth})
 	}
 
 	getHomesFromDb = async () => {
@@ -33,7 +33,7 @@ class Display extends Component {
 		if(this.props.isMapOn) {
 			return (
 				<div ref={(r)=>this.mapContainer = r} className="Display">
-					<Map width={this.state.mapWidth} refreshDisplay={this.refreshDisplay} itemList = {this.props.homes.homesList}/>
+					<Map widthAndHeight={this.state.mapWidthAndHeight} refreshDisplay={this.refreshDisplay} itemsAndMapInfo = {this.props.homes}/>
 				</div>
 			)
 		} else {
