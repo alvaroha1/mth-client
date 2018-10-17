@@ -35,7 +35,6 @@ class Map extends Component {
 	}
 
 	render() {
-		// const popup = <a href={url}>
 		const list = this.props.itemList.map((home, i)=>{
 			if(home.estimatedPricePercentageDifference>0){
 				return(
