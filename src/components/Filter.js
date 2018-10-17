@@ -7,6 +7,8 @@ import 'rc-slider/assets/index.css';
 import './Filter.css';
 import qs from 'qs';
 
+const mapInfo = require('./mapInfo.json');
+
 const discountMax = {
 	'-50': <strong>-50%</strong>,
 	0: 0,
