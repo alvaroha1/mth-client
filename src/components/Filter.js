@@ -7,9 +7,9 @@ import './Filter.css';
 import qs from 'qs';
 
 const discountMax = {
-	'-100': <strong>-100%</strong>,
+	'-50': <strong>-50%</strong>,
 	0: 0,
-	100: <strong>+100%</strong>,
+	50: <strong>+50%</strong>,
 }
 
 const sizeRange = {
@@ -40,9 +40,9 @@ const initialState = {
 }
 
 const sliderDiscountSetup = {
-	min: -100,
-	max: 100,
-	step: 10,
+	min: -50,
+	max: 50,
+	step: 5,
 	included: false,
 	defaultValue: 0,
 }	
