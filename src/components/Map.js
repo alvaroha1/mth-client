@@ -29,7 +29,6 @@ class Map extends Component {
 		}
 	}
 
-
 	refreshWidth () {
 		return this.props.refreshDisplay()
 	}
@@ -70,7 +69,6 @@ class Map extends Component {
 			}
 		}
 		)
-
 
 		return (
 			<ReactMapGL
