@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactMapGL, {Marker} from 'react-map-gl'
 import './Map.css'
 
+// const _ = 
 const debounce = require('lodash.debounce')
 const accessToken = 'pk.eyJ1Ijoic3RldmVuc3B5cmFtaWQiLCJhIjoiY2puMWl4NDluM3g5aTNwcG56YWVhb293YiJ9.UpzML4DXnrPKkVdvY0IOJQ'
 
@@ -31,8 +32,11 @@ class Map extends Component {
 		return this.props.refreshDisplay()
 	}
 
-	fetchOnMapChange(){
-	}
+	// fetchOnMapChange(){
+	// 	console.log('yeah')
+
+	//get request with queryparameters
+	// }
 	render() {
 		const positiveNegative = (num)=>num>0 ? 'success' : 'danger'
 		const list = this.props.itemsAndMapInfo.homesList.map((home, i)=>{
@@ -65,7 +69,7 @@ class Map extends Component {
 						longitude: viewport.longitude,
 						zoom: viewport.zoom,
 					}})
-					fetchOnMapChange()
+					// debounce(this.fetchOnMapChange(),400)
 				}
 				}
 			>
