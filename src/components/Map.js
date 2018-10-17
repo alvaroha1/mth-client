@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactMapGL, {Marker} from 'react-map-gl'
 import './Map.css'
 
-const accesToken = 'pk.eyJ1Ijoic3RldmVuc3B5cmFtaWQiLCJhIjoiY2puMWl4NDluM3g5aTNwcG56YWVhb293YiJ9.UpzML4DXnrPKkVdvY0IOJQ'
+const accessToken = 'pk.eyJ1Ijoic3RldmVuc3B5cmFtaWQiLCJhIjoiY2puMWl4NDluM3g5aTNwcG56YWVhb293YiJ9.UpzML4DXnrPKkVdvY0IOJQ'
 
 class Map extends Component {
 	constructor(props){
@@ -52,7 +52,7 @@ class Map extends Component {
 
 		return (
 			<ReactMapGL
-				mapboxApiAccessToken={accesToken}
+				mapboxApiAccessToken={accessToken}
 				{...this.state.viewport}
 				onViewportChange={(viewport) =>{
 					this.refreshWidth()
