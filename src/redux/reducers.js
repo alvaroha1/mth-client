@@ -4,7 +4,7 @@ const initalState = {
 		homesList: []
 	},
 	queryParameters: {
-		estimatedPricePercentageDifference: -10,
+		estimatedPricePercentageDifference: [-50,50],
 		price: [0,2000000],
 		size: [0,200],
 		country: null,
@@ -34,6 +34,7 @@ const reducer = (state = initalState, action) => {
 		}
 
 	case 'FILTERED_HOMES_SUCCESS':
+		console.log('FILTERED_HOMES_SUCCESS');
 		return {
 			...state,
 			filteredHomes: action.payload,

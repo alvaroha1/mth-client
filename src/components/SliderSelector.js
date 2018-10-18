@@ -5,7 +5,7 @@ import './Filter.css';
 
 export default class SliderSelector extends Component {
   render () {
-    const { title, min, max, marks, step, included, defaultValue, allowCross, setPrice} = this.props;
+    const { title, min, max, marks, step, included, defaultValue, allowCross, onChange} = this.props;
     return (
       <article className="message is-link">
         <div className="message-header">
@@ -21,7 +21,7 @@ export default class SliderSelector extends Component {
               included={included}
               defaultValue={defaultValue}
               allowCross={allowCross}
-              onChange={setPrice}
+              onChange={onChange}
             />
           </div>
         </div>

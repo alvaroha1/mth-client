@@ -8,6 +8,7 @@ import qs from 'qs';
 import { queryParameters } from '../redux/actions';
 import SliderSelector from './SliderSelector'
 import CitySelector from './CitySelector'
+import { getFilterHomes } from '../redux/actions.js';
 const mapInfo = require('./mapInfo.json');
 
 const discountMax = {
@@ -64,83 +65,22 @@ const rangeSizeSetup = {
 }
 
 class Filter extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			estimatedPricePercentageDifference: initialState.estimatedPricePercentageDifference,
-			price: initialState.price,
-			size: initialState.size,
-			country: initialState.country,
-			city: initialState.city,
-			centerLatitude: null,
-			centerLongitude: null,
-			radius: 50000,
-			page: 1,
-		}
-	this.setEstimatedPricePercentageDifference = debounce(this.setEstimatedPricePercentageDifference, 500);
-	this.setSize = debounce(this.setSize, 500);
-	this.setPrice = debounce(this.setPrice, 500);
+
+	// this is ugly code duplication... needs refactoring!
+	handleFilterChangePrice = (value) => {
+		const newQueryParameters = this.props.queryParameters
+		newQueryParameters.price = value
+		this.props.getFilterHomes(newQueryParameters);
 	}
-
-	componentDidMount () {
-
+	handleFilterChangeSize = (value) => {
+		const newQueryParameters = this.props.queryParameters
+		newQueryParameters.size = value
+		this.props.getFilterHomes(newQueryParameters);
 	}
-
-	getFilterHomes = async () => {
-		await this.props.getFilterHomes()
-	}
-
-	setEstimatedPricePercentageDifference = (value) => {
-		this.setState({estimatedPricePercentageDifference: value}, ()=>{
-			this.getQuery();
-		})
-	}
-
-	setPrice = (value) => {
-		this.setState({price: value}, ()=>{
-			this.getQuery();
-		})
-	}
-
-	setSize = (value) => {
-		this.setState({size: value}, ()=>{
-			this.getQuery();
-		})
-	}
-
-	setCountry = (value) => {
-		this.setState({country: value.target.value}, ()=>{
-			this.getQuery();
-		})
-	}
-
-	setCity = (value) => {
-		const { name, latitude, longitude } = mapInfo.mapInfo.filter(obj => obj.name === value.target.value )[0];
-		this.setState({
-			city: name,
-			centerLatitude: latitude,
-			centerLongitude: longitude,
-		}, () => {
-			this.getQuery();
-		})
-	}
-
-	getQuery = () => {
-		const filter = qs.stringify(this.state)
-		this.props.filterHomes(filter);
-		const qp = this.state;
-		this.props.queryParameters(qp);
-	}
-
-	renderCountrySelector = () => {
-		return (
-			<select name="country" onChange={this.setCountry}>
-				<option >Select one</option>
-				<option value="es">Spain</option>
-				<option value="fr">France</option>
-				<option value="it">Italy</option>
-			</select>
-		)
+	handleFilterChangeDiscount = (value) => {
+		const newQueryParameters = this.props.queryParameters
+		newQueryParameters.estimatedPricePercentageDifference = value
+		this.props.getFilterHomes(newQueryParameters);
 	}
 
 	render() {
@@ -156,7 +96,7 @@ class Filter extends Component {
 					included={rangePriceSetup.included}
 					defaultValue={rangePriceSetup.defaultValue}
 					allowCross={rangePriceSetup.allowCross}
-					onChange={this.setPrice}
+					onChange={this.handleFilterChangePrice}
 				/>
 				<SliderSelector
 					title='Size'
@@ -167,7 +107,7 @@ class Filter extends Component {
 					included={rangeSizeSetup.included}
 					defaultValue={rangeSizeSetup.defaultValue}
 					allowCross={rangeSizeSetup.allowCross}
-					onChange={this.setSize}
+					onChange={this.handleFilterChangeSize}
 				/>
 				<SliderSelector
 					title='Discount %'
@@ -177,7 +117,7 @@ class Filter extends Component {
 					marks={discountMax}
 					included={sliderDiscountSetup.included}
 					defaultValue={sliderDiscountSetup.defaultValue}
-					onChange={this.setEstimatedPricePercentageDifference}
+					onChange={this.handleFilterChangeDiscount}
 				/>
 			</div>
 		)
@@ -190,14 +130,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-	filterHomes: (filter) => dispatch({
-		type: 'FILTER_HOMES',
-    api: {
-      endpoint: '/homes?'+filter
-    }
-	}),
-	queryParameters: (qp) => dispatch(queryParameters(qp))
-
+	getFilterHomes: (queryParameters) => dispatch(getFilterHomes(queryParameters))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter)
