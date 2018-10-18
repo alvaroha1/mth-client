@@ -45,7 +45,7 @@ class Map extends Component {
 
 	render() {
 
-		const positiveNegative = (num)=>num>0 ? 'danger' : 'succes'
+		const positiveNegative = (num)=>num>0 ? 'danger' : 'success'
 		const list = this.props.itemsAndMapInfo.homesList.map((home, i)=>{
 			return(
 				<Marker key={i} latitude={home.latitude} longitude={home.longitude}>
