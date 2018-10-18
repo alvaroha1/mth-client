@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import ReactMapGL, {Marker} from 'react-map-gl'
-import { connect } from 'react-redux'
 import './Map.css'
+import {debounce} from 'lodash'
 
-// const _ = 
-const debounce = require('lodash.debounce')
 const accessToken = 'pk.eyJ1Ijoic3RldmVuc3B5cmFtaWQiLCJhIjoiY2puMWl4NDluM3g5aTNwcG56YWVhb293YiJ9.UpzML4DXnrPKkVdvY0IOJQ'
 
 class Map extends Component {
@@ -19,6 +17,7 @@ class Map extends Component {
 				zoom: Math.log2(156543.03/(this.props.itemsAndMapInfo.radius/(this.props.widthAndHeight/2)))
 			}
 		}
+		this.refreshPage = debounce(this.refreshPage, 300)
 	}
 	componentDidUpdate(prevProps) {
 		if(prevProps.width !== this.props.width) {
@@ -33,13 +32,12 @@ class Map extends Component {
 		return this.props.refreshDisplay()
 	}
 
-	fetchOnMapChange(){
-		console.log('yeah')
+
+	refreshPage(viewport){
 	}
-	// fetchOnMapChangeDebounce () {
-	// 	debounce(this.fetchOnMapChange(),400)
-	// }
+
 	render() {
+
 		const positiveNegative = (num)=>num>0 ? 'success' : 'danger'
 		const list = this.props.itemsAndMapInfo.homesList.map((home, i)=>{
 			return(
@@ -71,7 +69,7 @@ class Map extends Component {
 						longitude: viewport.longitude,
 						zoom: viewport.zoom,
 					}})
-					this.fetchOnMapChange()
+					this.refreshPage(viewport)
 				}
 				}
 			>
@@ -80,19 +78,4 @@ class Map extends Component {
 		)
 	}
 }
-
-const mapStateToProps = (state) => ({
-	queryParameters: state.queryParameters
-})
-
-const mapDispatchToProps = (dispatch) => ({
-	filterHomes: (filter) => dispatch({
-		type: 'FILTER_HOMES',
-		api: {
-			endpoint: '/homes?'+filter
-		}
-	}),
-	// queryParameters: (qp) => dispatch(queryParameters(qp))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Map)
+export default Map
