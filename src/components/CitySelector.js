@@ -1,21 +1,44 @@
-import React, { Component } from 'react';
-import Slider, { Range } from 'rc-slider';
-import 'rc-slider/assets/index.css';
-import './Filter.css';
-const mapInfo = require('./mapInfo.json');
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { getFilteredHomes } from '../redux/actions.js'
+import 'rc-slider/assets/index.css'
+import './Filter.css'
+const { mapInfo } = require('./mapInfo.json')
+/* eslint-disable indent*/
 
+class CitySelector extends Component {
 
-export default class CitySelector extends Component {
-  setCity = (value) => {
-    const { name, latitude, longitude } = mapInfo.mapInfo.filter(obj => obj.name === value.target.value )[0];
-    this.setState({
-      city: name,
-      centerLatitude: latitude,
-      centerLongitude: longitude,
-    }, () => {})
+  handleChange = (cityObj) => {
+    // hardcoded and doesnt work...
+    cityObj = {
+      "name": "barcelona",
+      "label": "Barcelona",
+      "latitude": 41.385063,
+      "longitude": 2.173404,
+      "radius": 50000
+    };
+    console.log('handleChange');
+    const newQueryParameters = this.props.queryParameters
+    newQueryParameters.city = cityObj.name
+    newQueryParameters.centerLatitude = cityObj.latitude
+    newQueryParameters.centerLongitude = cityObj.longitude
+    newQueryParameters.radius = cityObj.radius
+    console.log(newQueryParameters);
+    this.props.getFilteredHomes(newQueryParameters);
   }
 
   render () {
+    const options = mapInfo.map((cityObj, i) => {
+      return (
+        <option
+          key={i}
+          value={cityObj}
+        >
+        {cityObj.label}
+        </option>
+      )}
+    )
+
     return (
       <article className="message is-link">
         <div className="message-header">
@@ -25,13 +48,9 @@ export default class CitySelector extends Component {
           <div className="field has-addons">
             <div className="control is-expanded">
               <div className="select is-fullwidth is-link">
-                <select name="city" onChange={this.setCity}>
+                <select name="city" onChange={this.handleChange}>
                   <option >Select one</option>
-                  <option value="ajaccio">Ajaccio</option>
-                  <option value="marseille">Marseille</option>
-                  <option value="nice">Nice</option>
-                  <option value="cannes">Cannes</option>
-                  <option value="montpellier">Montpellier</option>
+                  {options}
                 </select>
               </div>
             </div>
@@ -41,3 +60,13 @@ export default class CitySelector extends Component {
     )
   }
 };
+
+const mapStateToProps = (state) => ({
+	queryParameters: state.queryParameters
+})
+
+const mapDispatchToProps = (dispatch) => ({
+	getFilteredHomes: (queryParameters) => dispatch(getFilteredHomes(queryParameters))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CitySelector)

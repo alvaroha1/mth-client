@@ -29,14 +29,6 @@ const priceRange = {
 	2000000: <strong>2MM€</strong>,
 }
 
-const initialState = {
-	estimatedPricePercentageDifference : 0,
-	price : [0,2000000],
-	size : [0,200],
-	country : null,
-	city : null,
-}
-
 const sliderDiscountSetup = {
 	min: -50,
 	max: 50,
