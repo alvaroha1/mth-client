@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactMapGL, {Marker} from 'react-map-gl'
+import { connect } from 'react-redux'
 import './Map.css'
 
 // const _ = 
@@ -32,10 +33,11 @@ class Map extends Component {
 		return this.props.refreshDisplay()
 	}
 
-	// fetchOnMapChange(){
-	// 	console.log('yeah')
-
-	//get request with queryparameters
+	fetchOnMapChange(){
+		console.log('yeah')
+	}
+	// fetchOnMapChangeDebounce () {
+	// 	debounce(this.fetchOnMapChange(),400)
 	// }
 	render() {
 		const positiveNegative = (num)=>num>0 ? 'success' : 'danger'
@@ -69,7 +71,7 @@ class Map extends Component {
 						longitude: viewport.longitude,
 						zoom: viewport.zoom,
 					}})
-					// debounce(this.fetchOnMapChange(),400)
+					this.fetchOnMapChange()
 				}
 				}
 			>
@@ -78,4 +80,19 @@ class Map extends Component {
 		)
 	}
 }
-export default Map
+
+const mapStateToProps = (state) => ({
+	queryParameters: state.queryParameters
+})
+
+const mapDispatchToProps = (dispatch) => ({
+	filterHomes: (filter) => dispatch({
+		type: 'FILTER_HOMES',
+		api: {
+			endpoint: '/homes?'+filter
+		}
+	}),
+	// queryParameters: (qp) => dispatch(queryParameters(qp))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Map)
