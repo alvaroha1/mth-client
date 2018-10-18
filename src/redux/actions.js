@@ -7,7 +7,7 @@ export const mapToggle = data => ({
 	bool: data,
 })
 
-export const getFilterHomes = (queryParameters) => {
+export const getFilteredHomes = (queryParameters) => {
 	const urlParameters = qs.stringify(queryParameters)
 	const endpoint = `${serverAddress}/homes?${urlParameters}`
 	return {

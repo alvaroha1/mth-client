@@ -8,7 +8,7 @@ import qs from 'qs';
 import { queryParameters } from '../redux/actions';
 import SliderSelector from './SliderSelector'
 import CitySelector from './CitySelector'
-import { getFilterHomes } from '../redux/actions.js';
+import { getFilteredHomes } from '../redux/actions.js';
 const mapInfo = require('./mapInfo.json');
 
 const discountMax = {
@@ -70,17 +70,17 @@ class Filter extends Component {
 	handleFilterChangePrice = (value) => {
 		const newQueryParameters = this.props.queryParameters
 		newQueryParameters.price = value
-		this.props.getFilterHomes(newQueryParameters);
+		this.props.getFilteredHomes(newQueryParameters);
 	}
 	handleFilterChangeSize = (value) => {
 		const newQueryParameters = this.props.queryParameters
 		newQueryParameters.size = value
-		this.props.getFilterHomes(newQueryParameters);
+		this.props.getFilteredHomes(newQueryParameters);
 	}
 	handleFilterChangeDiscount = (value) => {
 		const newQueryParameters = this.props.queryParameters
 		newQueryParameters.estimatedPricePercentageDifference = value
-		this.props.getFilterHomes(newQueryParameters);
+		this.props.getFilteredHomes(newQueryParameters);
 	}
 
 	render() {
@@ -125,12 +125,11 @@ class Filter extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	homes: state.filteredHomes,
 	queryParameters: state.queryParameters
 })
 
 const mapDispatchToProps = (dispatch) => ({
-	getFilterHomes: (queryParameters) => dispatch(getFilterHomes(queryParameters))
+	getFilteredHomes: (queryParameters) => dispatch(getFilteredHomes(queryParameters))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter)
