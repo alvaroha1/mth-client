@@ -34,7 +34,7 @@ class Display extends Component {
 					<Map
 						widthAndHeight={this.state.mapWidthAndHeight}
 						refreshDisplay={this.refreshDisplay}
-						itemsAndMapInfo = {this.props.filterHomes}
+						itemsAndMapInfo = {this.props.filteredHomes}
 					/>
 				</div>
 			)
