@@ -1,15 +1,15 @@
 import React from 'react'
 import Item from './Item'
-import Bulma, {tile} from 'bulma'
+import {tile} from 'bulma'
 
 function ItemList({itemList}){
 	const listItems = itemList.map((home, i)=>(
 		<Item
-			key={i} 
+			key={i}
 			url={home.url}
 			thumbnail={home.thumbnail}
 			pricePerSquareMeter={home.pricePerSquareMeter}
-			price={home.price} 
+			price={home.price}
 			estimatedPrice={home.estimatedPrice}
 			size={home.size}
 		/>

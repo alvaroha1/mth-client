@@ -27,24 +27,32 @@ const reducer = (state = initalState, action) => {
 			isMapOn: action.bool
 		}
 
-	case 'GET_HOMES_SUCCESS':
+	case 'FILTERED_HOMES_REQUEST':
 		return {
 			...state,
-			homes: action.data
+			errors: {},
 		}
 
-	case 'FILTER_HOMES_SUCCESS':
+	case 'FILTERED_HOMES_SUCCESS':
 		return {
 			...state,
-			filteredHomes: action.data
+			filteredHomes: action.payload,
+			errors: {},
+		}
+
+	case 'FILTERED_HOMES_FAILURE':
+		return {
+			...state,
+			filteredHomes: {},
+			errors: action.payload.response || {'non_field_errors': action.payload.statusText},
 		}
 
 	case 'UPDATE_QUERY_PARAMETERS':
 		return {
 			...state,
 			queryParameters: action.qp
-		}		
-		
+		}
+
 	default:
 		return state
 	}

@@ -5,10 +5,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkedAlt, faListUl } from '@fortawesome/free-solid-svg-icons'
 import './SwitchViews.css'
-
-
 library.add(faMapMarkedAlt, faListUl)
-
 
 
 class SwitchViews extends Component {
@@ -31,7 +28,6 @@ class SwitchViews extends Component {
 		    <ul>
 		      <li>
 						<a onClick={()=> this.mapToggleOff()}>
-						
 		          <span className="element"><FontAwesomeIcon icon="list-ul" /></span>
 		          <strong><span className="element">List</span></strong>
 		        </a>
@@ -54,8 +50,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(null, mapDispatchToProps)(SwitchViews)
-
-
-
-
-
