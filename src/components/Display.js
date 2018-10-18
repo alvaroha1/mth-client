@@ -28,7 +28,6 @@ class Display extends Component {
 	}
 
 	render() {
-		console.log('this.props.homes from display:',this.props.homes)
 		if(this.props.isMapOn) {
 			return (
 				<div ref={(r)=>this.mapContainer = r} className="Display">
