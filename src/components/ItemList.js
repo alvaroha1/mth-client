@@ -12,6 +12,8 @@ function ItemList({itemList}){
 			price={home.price}
 			estimatedPrice={home.estimatedPrice}
 			size={home.size}
+			city={home.city}
+			estimatedPricePercentageDifference={home.estimatedPricePercentageDifference}
 		/>
 	))
 
