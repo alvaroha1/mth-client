@@ -14,7 +14,7 @@ class Display extends Component {
 	}
 
 	componentDidMount () {
-		this.props.getFilterHomes();
+		this.props.getFilterHomes(this.props.queryParameters);
 		window.addEventListener("resize", this.resize);
 		this.setState({mapWidthAndHeight : this.mapContainer.offsetWidth})
 	}
@@ -52,11 +52,12 @@ class Display extends Component {
 
 const mapStateToProps = (state) => ({
 	filteredHomes: state.filteredHomes,
+	queryParameters: state.queryParameters,
 	isMapOn: state.isMapOn
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getFilterHomes: () => dispatch(getFilterHomes())
+  getFilterHomes: (queryParameters) => dispatch(getFilterHomes(queryParameters))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Display)

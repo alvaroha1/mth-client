@@ -6,6 +6,9 @@ import 'rc-slider/assets/index.css';
 import './Filter.css';
 import qs from 'qs';
 import { queryParameters } from '../redux/actions';
+import SliderSelector from './SliderSelector'
+import CitySelector from './CitySelector'
+import { getFilterHomes } from '../redux/actions.js';
 const mapInfo = require('./mapInfo.json');
 
 const discountMax = {
@@ -37,9 +40,10 @@ const initialState = {
 const sliderDiscountSetup = {
 	min: -50,
 	max: 50,
-	step: 5,
+	step: 10,
 	included: false,
-	defaultValue: 0,
+	defaultValue: [-50,50],
+	allowCross: false,
 }
 
 const rangePriceSetup = {
@@ -61,233 +65,60 @@ const rangeSizeSetup = {
 }
 
 class Filter extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			estimatedPricePercentageDifference: initialState.estimatedPricePercentageDifference,
-			price: initialState.price,
-			size: initialState.size,
-			country: initialState.country,
-			city: initialState.city,
-			centerLatitude: null,
-			centerLongitude: null,
-			radius: 50000,
-			page: 1,
-		}
-	this.setEstimatedPricePercentageDifference = debounce(this.setEstimatedPricePercentageDifference, 500);
-	this.setSize = debounce(this.setSize, 500);
-	this.setPrice = debounce(this.setPrice, 500);
-	}
 
-	getFilterHomes = async () => {
-		await this.props.getFilterHomes()
+	// this is ugly code duplication... needs refactoring!
+	handleFilterChangePrice = (value) => {
+		const newQueryParameters = this.props.queryParameters
+		newQueryParameters.price = value
+		this.props.getFilterHomes(newQueryParameters);
 	}
-
-	setEstimatedPricePercentageDifference = (value) => {
-		this.setState({estimatedPricePercentageDifference: value}, ()=>{
-			this.getQuery();
-		})
+	handleFilterChangeSize = (value) => {
+		const newQueryParameters = this.props.queryParameters
+		newQueryParameters.size = value
+		this.props.getFilterHomes(newQueryParameters);
 	}
-
-	setPrice = (value) => {
-		this.setState({price: value}, ()=>{
-			this.getQuery();
-		})
-	}
-
-	setSize = (value) => {
-		this.setState({size: value}, ()=>{
-			this.getQuery();
-		})
-	}
-
-	setCountry = (value) => {
-		this.setState({country: value.target.value}, ()=>{
-			this.getQuery();
-		})
-	}
-
-	setCity = (value) => {
-		const { name, latitude, longitude } = mapInfo.mapInfo.filter(obj => obj.name === value.target.value )[0];
-		this.setState({
-			city: name,
-			centerLatitude: latitude,
-			centerLongitude: longitude,
-		}, () => {
-			this.getQuery();
-		})
-	}
-
-	getQuery = () => {
-		const filter = qs.stringify(this.state)
-		this.props.filterHomes(filter);
-		const qp = this.state;
-		this.props.queryParameters(qp);
-	}
-
-	renderCountrySelector = () => {
-		return (
-			<select name="country" onChange={this.setCountry}>
-				<option >Select one</option>
-				<option value="es">Spain</option>
-				<option value="fr">France</option>
-				<option value="it">Italy</option>
-			</select>
-		)
-	}
-
-	renderCitySelector = () => {
-		if(!this.state.country) return null;
-		if(this.state.country === "es") {
-			return (
-				<article className="message is-link">
-  				<div className="message-header">
-					<h4><strong>City</strong></h4>
-  				</div>
-  			<div className="message-body">
-					<div className="field has-addons">
-						<div className="control is-expanded">
-							<div className="select is-fullwidth is-link">
-								<select name="city" onChange={this.setCity}>
-									<option >Select one</option>
-									<option value="barcelona">Barcelona</option>
-									<option value="valencia">Valencia</option>
-									<option value="murcia">Murcia</option>
-									<option value="malaga">Malaga</option>
-									<option value="palma-de-mallorca">Palma de Mallorca</option>
-								</select>
-							</div>
-						</div>
-					</div>
-  			</div>
-			</article>
-			)
-		} else if (this.state.country === "it") {
-			return (
-				<article className="message is-link">
-  				<div className="message-header">
-					<h4><strong>City</strong></h4>
-  				</div>
-  				<div className="message-body">
-						<div className="field has-addons">
-							<div className="control is-expanded">
-								<div className="select is-fullwidth is-link">
-									<select name="city" onChange={this.setCity}>
-										<option >Select one</option>
-										<option value="roma">Roma</option>
-										<option value="genova">Genova</option>
-										<option value="naples">Naples</option>
-										<option value="palermo">Palermo</option>
-										<option value="cagliari">Cagliari</option>
-									</select>
-								</div>
-							</div>
-						</div>
-  				</div>
-				</article>
-			)
-		} else if (this.state.country === "fr") {
-			return (
-				<article className="message is-link">
-  				<div className="message-header">
-					<h4><strong>City</strong></h4>
-  				</div>
-  				<div className="message-body">
-						<div className="field has-addons">
-							<div className="control is-expanded">
-								<div className="select is-fullwidth is-link">
-									<select name="city" onChange={this.setCity}>
-										<option >Select one</option>
-										<option value="ajaccio">Ajaccio</option>
-										<option value="marseille">Marseille</option>
-										<option value="nice">Nice</option>
-										<option value="cannes">Cannes</option>
-										<option value="montpellier">Montpellier</option>
-									</select>
-								</div>
-							</div>
-						</div>
-  				</div>
-				</article>
-			)
-		}
+	handleFilterChangeDiscount = (value) => {
+		const newQueryParameters = this.props.queryParameters
+		newQueryParameters.estimatedPricePercentageDifference = value
+		this.props.getFilterHomes(newQueryParameters);
 	}
 
 	render() {
 		return (
 			<div className="Filter">
-			<article className="message is-link">
-  			<div className="message-header">
-				<h4><strong>Country</strong></h4>
-  			</div>
-  			<div className="message-body">
-					<div className="field has-addons">
-						<div className="control is-expanded">
-							<div className="select is-fullwidth is-link">
-								{this.renderCountrySelector()}
-							</div>
-						</div>
-					</div>
-  			</div>
-			</article>
-
-			{this.renderCitySelector()}
-
-			<article className="message is-link">
-  			<div className="message-header">
-				<h4><strong>Discount(%)</strong></h4>
-  			</div>
-  			<div className="message-body">
-				<div className="slider">
-					<Slider
-						min={sliderDiscountSetup.min}
-						max={sliderDiscountSetup.max}
-						marks={discountMax}
-						included={sliderDiscountSetup.included}
-						defaultValue={sliderDiscountSetup.defaultValue}
-						onAfterChange={this.setEstimatedPricePercentageDifference}/>
-				</div>
-  			</div>
-			</article>
-
-			<article className="message is-link">
-  			<div className="message-header">
-				<h4><strong>Price</strong></h4>
-  			</div>
-  			<div className="message-body">
-				<div className="slider">
-					<Range
-						min={rangePriceSetup.min}
-						max={rangePriceSetup.max}
-						marks={priceRange}
-						step={rangePriceSetup.step}
-						included={rangePriceSetup.included}
-						defaultValue={rangePriceSetup.defaultValue}
-						allowCross={rangePriceSetup.allowCross}
-						onChange={this.setPrice}/>
-				</div>
-  			</div>
-			</article>
-
-			<article className="message is-link">
-  			<div className="message-header">
-				<h4><strong>Size</strong></h4>
-  			</div>
-  			<div className="message-body">
-				<div className="slider">
-					<Range
-						min={rangeSizeSetup.min}
-						max={rangeSizeSetup.max}
-						step={rangeSizeSetup.step}
-						marks={sizeRange}
-						included={rangeSizeSetup.included}
-						defaultValue={rangeSizeSetup.defaultValue}
-						allowCross={rangeSizeSetup.allowCross}
-						onChange={this.setSize}/>
-				</div>
-  			</div>
-			</article>
-
+				<CitySelector />
+				<SliderSelector
+					title='Price'
+					min={rangePriceSetup.min}
+					max={rangePriceSetup.max}
+					marks={priceRange}
+					step={rangePriceSetup.step}
+					included={rangePriceSetup.included}
+					defaultValue={rangePriceSetup.defaultValue}
+					allowCross={rangePriceSetup.allowCross}
+					onChange={this.handleFilterChangePrice}
+				/>
+				<SliderSelector
+					title='Size'
+					min={rangeSizeSetup.min}
+					max={rangeSizeSetup.max}
+					step={rangeSizeSetup.step}
+					marks={sizeRange}
+					included={rangeSizeSetup.included}
+					defaultValue={rangeSizeSetup.defaultValue}
+					allowCross={rangeSizeSetup.allowCross}
+					onChange={this.handleFilterChangeSize}
+				/>
+				<SliderSelector
+					title='Discount %'
+					min={sliderDiscountSetup.min}
+					max={sliderDiscountSetup.max}
+					step={sliderDiscountSetup.step}
+					marks={discountMax}
+					included={sliderDiscountSetup.included}
+					defaultValue={sliderDiscountSetup.defaultValue}
+					onChange={this.handleFilterChangeDiscount}
+				/>
 			</div>
 		)
 	}
@@ -299,14 +130,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-	filterHomes: (filter) => dispatch({
-		type: 'FILTER_HOMES',
-    api: {
-      endpoint: '/homes?'+filter
-    }
-	}),
-	queryParameters: (qp) => dispatch(queryParameters(qp))
-
+	getFilterHomes: (queryParameters) => dispatch(getFilterHomes(queryParameters))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter)

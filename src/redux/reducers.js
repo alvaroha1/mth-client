@@ -4,15 +4,15 @@ const initalState = {
 		homesList: []
 	},
 	queryParameters: {
-		estimatedPricePercentageDifference: null,
-		price: null,
-		size: null,
+		estimatedPricePercentageDifference: [-50,50],
+		price: [0,2000000],
+		size: [0,200],
 		country: null,
 		city: null,
-		centerLatitude: null,
-		centerLongitude: null,
-		radius: null,
-		page: null,
+		centerLatitude: 41.385063,
+		centerLongitude: 2.173404,
+		radius: 50000,
+		page: 1,
 	},
 	totalPages: null,
 	totalResults: null,
@@ -34,6 +34,7 @@ const reducer = (state = initalState, action) => {
 		}
 
 	case 'FILTERED_HOMES_SUCCESS':
+		console.log('FILTERED_HOMES_SUCCESS');
 		return {
 			...state,
 			filteredHomes: action.payload,
