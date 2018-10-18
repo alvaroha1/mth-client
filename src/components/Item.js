@@ -1,5 +1,4 @@
 import React from 'react'
-import Bulma, {tile} from 'bulma'
 import '../App.css'
 
 function Item({url, thumbnail, pricePerSquareMeter,
@@ -37,4 +36,3 @@ function Item({url, thumbnail, pricePerSquareMeter,
 }
 
 export default Item
-

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Bulma from 'bulma'
 import { connect } from 'react-redux';
 import { debounce } from 'lodash';
 import Slider, { Range } from 'rc-slider';
@@ -41,7 +40,7 @@ const sliderDiscountSetup = {
 	step: 5,
 	included: false,
 	defaultValue: 0,
-}	
+}
 
 const rangePriceSetup = {
 	min: 0,
@@ -231,7 +230,7 @@ class Filter extends Component {
 					</div>
   			</div>
 			</article>
-			
+
 			{this.renderCitySelector()}
 
 			<article className="message is-link">
@@ -240,16 +239,16 @@ class Filter extends Component {
   			</div>
   			<div className="message-body">
 				<div className="slider">
-					<Slider 
-						min={sliderDiscountSetup.min} 
-						max={sliderDiscountSetup.max} 
-						marks={discountMax} 
-						included={sliderDiscountSetup.included} 
-						defaultValue={sliderDiscountSetup.defaultValue} 
+					<Slider
+						min={sliderDiscountSetup.min}
+						max={sliderDiscountSetup.max}
+						marks={discountMax}
+						included={sliderDiscountSetup.included}
+						defaultValue={sliderDiscountSetup.defaultValue}
 						onAfterChange={this.setEstimatedPricePercentageDifference}/>
 				</div>
   			</div>
-			</article>	
+			</article>
 
 			<article className="message is-link">
   			<div className="message-header">
@@ -257,13 +256,13 @@ class Filter extends Component {
   			</div>
   			<div className="message-body">
 				<div className="slider">
-					<Range 
-						min={rangePriceSetup.min} 
-						max={rangePriceSetup.max} 
-						marks={priceRange} 
+					<Range
+						min={rangePriceSetup.min}
+						max={rangePriceSetup.max}
+						marks={priceRange}
 						step={rangePriceSetup.step}
 						included={rangePriceSetup.included}
-						defaultValue={rangePriceSetup.defaultValue} 
+						defaultValue={rangePriceSetup.defaultValue}
 						allowCross={rangePriceSetup.allowCross}
 						onChange={this.setPrice}/>
 				</div>
@@ -276,18 +275,18 @@ class Filter extends Component {
   			</div>
   			<div className="message-body">
 				<div className="slider">
-					<Range 
-						min={rangeSizeSetup.min} 
-						max={rangeSizeSetup.max} 
+					<Range
+						min={rangeSizeSetup.min}
+						max={rangeSizeSetup.max}
 						step={rangeSizeSetup.step}
-						marks={sizeRange} 
-						included={rangeSizeSetup.included} 
-						defaultValue={rangeSizeSetup.defaultValue} 
+						marks={sizeRange}
+						included={rangeSizeSetup.included}
+						defaultValue={rangeSizeSetup.defaultValue}
 						allowCross={rangeSizeSetup.allowCross}
 						onChange={this.setSize}/>
 				</div>
   			</div>
-			</article>	
+			</article>
 
 			</div>
 		)
@@ -311,7 +310,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter)
-
-
-
-
