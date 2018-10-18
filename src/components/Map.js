@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
 import ReactMapGL, {Marker} from 'react-map-gl'
-// import { connect } from 'react-redux'
 import './Map.css'
 import {debounce} from 'lodash'
 
-// const _ = 
-// const debounce = require('lodash.debounce')
 const accessToken = 'pk.eyJ1Ijoic3RldmVuc3B5cmFtaWQiLCJhIjoiY2puMWl4NDluM3g5aTNwcG56YWVhb293YiJ9.UpzML4DXnrPKkVdvY0IOJQ'
 
 class Map extends Component {
@@ -37,14 +34,6 @@ class Map extends Component {
 
 
 	refreshPage(viewport){
-		// this.refreshWidth()
-		// this.setState({viewport:{
-		// 	...this.state.viewport,
-		// 	latitude: viewport.latitude,
-		// 	longitude: viewport.longitude,
-		// 	zoom: viewport.zoom,
-		// }})
-		console.log('onviewportchange')
 	}
 
 	render() {
@@ -70,14 +59,9 @@ class Map extends Component {
 
 		return (
 			<ReactMapGL
-				// transitionInterpolator={new LinearInterpolator()}
 				mapboxApiAccessToken={accessToken}
 				{...this.state.viewport}
 				onViewportChange={(viewport) =>{
-					// console.log(interactionState)
-					// if(!interactionState.inTransition){
-					// 	console.log(interactionState)
-					// }
 					this.refreshWidth()
 					this.setState({viewport:{
 						...this.state.viewport,
@@ -86,61 +70,12 @@ class Map extends Component {
 						zoom: viewport.zoom,
 					}})
 					this.refreshPage(viewport)
-					// onTransitionEnd(){
-					// this.refreshWidth()
-					// this.setState({viewport:{
-					// 	...this.state.viewport,
-					// 	latitude: viewport.latitude,
-					// 	longitude: viewport.longitude,
-					// 	zoom: viewport.zoom,
-					// }})
-					// console.log('onviewportchange')
 				}
-					// this.fetchOnMapChange()
-					// console.log('changed!!!')
 				}
-				// }
-
-				// onInteractionStateChange={(interactionState)=>{
-				// 	console.log(interactionState)
-				// 	if(!interactionState.inTransition){
-				// 		// this.refreshWidth()
-				// 		console.log('hiiiiiiiiiii')
-				// 		this.setState({viewport:{
-				// 			...this.state.viewport,
-				// 			latitude: this.viewport.latitude,
-				// 			longitude: this.viewport.longitude,
-				// 			zoom: this.viewport.zoom,
-				// 		}})
-				// 		console.log('triggered')
-				// 	}
-				// 	console.log('after triggered')
-				// }
-				// }
-				// }
 			>
 				{list}
 			</ReactMapGL>
 		)
 	}
 }
-
-
-// const mapStateToProps = (state) => ({
-// 	queryParameters: state.queryParameters
-// })
-
-// const mapDispatchToProps = (dispatch) => ({
-// 	filterHomes: (filter) => dispatch({
-// 		type: 'FILTER_HOMES',
-// 		api: {
-// 			endpoint: '/homes?'+filter
-// 		}
-// 	}),
-// 	// queryParameters: (qp) => dispatch(queryParameters(qp))
-// })
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Map)
-
-
 export default Map
