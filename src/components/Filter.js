@@ -6,6 +6,8 @@ import 'rc-slider/assets/index.css';
 import './Filter.css';
 import qs from 'qs';
 import { queryParameters } from '../redux/actions';
+import SliderSelector from './SliderSelector'
+import CitySelector from './CitySelector'
 const mapInfo = require('./mapInfo.json');
 
 const discountMax = {
@@ -37,9 +39,10 @@ const initialState = {
 const sliderDiscountSetup = {
 	min: -50,
 	max: 50,
-	step: 5,
+	step: 10,
 	included: false,
-	defaultValue: 0,
+	defaultValue: [-50,50],
+	allowCross: false,
 }
 
 const rangePriceSetup = {
@@ -77,6 +80,10 @@ class Filter extends Component {
 	this.setEstimatedPricePercentageDifference = debounce(this.setEstimatedPricePercentageDifference, 500);
 	this.setSize = debounce(this.setSize, 500);
 	this.setPrice = debounce(this.setPrice, 500);
+	}
+
+	componentDidMount () {
+
 	}
 
 	getFilterHomes = async () => {
@@ -136,158 +143,42 @@ class Filter extends Component {
 		)
 	}
 
-	renderCitySelector = () => {
-		if(!this.state.country) return null;
-		if(this.state.country === "es") {
-			return (
-				<article className="message is-link">
-  				<div className="message-header">
-					<h4><strong>City</strong></h4>
-  				</div>
-  			<div className="message-body">
-					<div className="field has-addons">
-						<div className="control is-expanded">
-							<div className="select is-fullwidth is-link">
-								<select name="city" onChange={this.setCity}>
-									<option >Select one</option>
-									<option value="barcelona">Barcelona</option>
-									<option value="valencia">Valencia</option>
-									<option value="murcia">Murcia</option>
-									<option value="malaga">Malaga</option>
-									<option value="palma-de-mallorca">Palma de Mallorca</option>
-								</select>
-							</div>
-						</div>
-					</div>
-  			</div>
-			</article>
-			)
-		} else if (this.state.country === "it") {
-			return (
-				<article className="message is-link">
-  				<div className="message-header">
-					<h4><strong>City</strong></h4>
-  				</div>
-  				<div className="message-body">
-						<div className="field has-addons">
-							<div className="control is-expanded">
-								<div className="select is-fullwidth is-link">
-									<select name="city" onChange={this.setCity}>
-										<option >Select one</option>
-										<option value="roma">Roma</option>
-										<option value="genova">Genova</option>
-										<option value="naples">Naples</option>
-										<option value="palermo">Palermo</option>
-										<option value="cagliari">Cagliari</option>
-									</select>
-								</div>
-							</div>
-						</div>
-  				</div>
-				</article>
-			)
-		} else if (this.state.country === "fr") {
-			return (
-				<article className="message is-link">
-  				<div className="message-header">
-					<h4><strong>City</strong></h4>
-  				</div>
-  				<div className="message-body">
-						<div className="field has-addons">
-							<div className="control is-expanded">
-								<div className="select is-fullwidth is-link">
-									<select name="city" onChange={this.setCity}>
-										<option >Select one</option>
-										<option value="ajaccio">Ajaccio</option>
-										<option value="marseille">Marseille</option>
-										<option value="nice">Nice</option>
-										<option value="cannes">Cannes</option>
-										<option value="montpellier">Montpellier</option>
-									</select>
-								</div>
-							</div>
-						</div>
-  				</div>
-				</article>
-			)
-		}
-	}
-
 	render() {
 		return (
 			<div className="Filter">
-			<article className="message is-link">
-  			<div className="message-header">
-				<h4><strong>Country</strong></h4>
-  			</div>
-  			<div className="message-body">
-					<div className="field has-addons">
-						<div className="control is-expanded">
-							<div className="select is-fullwidth is-link">
-								{this.renderCountrySelector()}
-							</div>
-						</div>
-					</div>
-  			</div>
-			</article>
-
-			{this.renderCitySelector()}
-
-			<article className="message is-link">
-  			<div className="message-header">
-				<h4><strong>Discount(%)</strong></h4>
-  			</div>
-  			<div className="message-body">
-				<div className="slider">
-					<Slider
-						min={sliderDiscountSetup.min}
-						max={sliderDiscountSetup.max}
-						marks={discountMax}
-						included={sliderDiscountSetup.included}
-						defaultValue={sliderDiscountSetup.defaultValue}
-						onAfterChange={this.setEstimatedPricePercentageDifference}/>
-				</div>
-  			</div>
-			</article>
-
-			<article className="message is-link">
-  			<div className="message-header">
-				<h4><strong>Price</strong></h4>
-  			</div>
-  			<div className="message-body">
-				<div className="slider">
-					<Range
-						min={rangePriceSetup.min}
-						max={rangePriceSetup.max}
-						marks={priceRange}
-						step={rangePriceSetup.step}
-						included={rangePriceSetup.included}
-						defaultValue={rangePriceSetup.defaultValue}
-						allowCross={rangePriceSetup.allowCross}
-						onChange={this.setPrice}/>
-				</div>
-  			</div>
-			</article>
-
-			<article className="message is-link">
-  			<div className="message-header">
-				<h4><strong>Size</strong></h4>
-  			</div>
-  			<div className="message-body">
-				<div className="slider">
-					<Range
-						min={rangeSizeSetup.min}
-						max={rangeSizeSetup.max}
-						step={rangeSizeSetup.step}
-						marks={sizeRange}
-						included={rangeSizeSetup.included}
-						defaultValue={rangeSizeSetup.defaultValue}
-						allowCross={rangeSizeSetup.allowCross}
-						onChange={this.setSize}/>
-				</div>
-  			</div>
-			</article>
-
+				<CitySelector />
+				<SliderSelector
+					title='Price'
+					min={rangePriceSetup.min}
+					max={rangePriceSetup.max}
+					marks={priceRange}
+					step={rangePriceSetup.step}
+					included={rangePriceSetup.included}
+					defaultValue={rangePriceSetup.defaultValue}
+					allowCross={rangePriceSetup.allowCross}
+					onChange={this.setPrice}
+				/>
+				<SliderSelector
+					title='Size'
+					min={rangeSizeSetup.min}
+					max={rangeSizeSetup.max}
+					step={rangeSizeSetup.step}
+					marks={sizeRange}
+					included={rangeSizeSetup.included}
+					defaultValue={rangeSizeSetup.defaultValue}
+					allowCross={rangeSizeSetup.allowCross}
+					onChange={this.setSize}
+				/>
+				<SliderSelector
+					title='Discount %'
+					min={sliderDiscountSetup.min}
+					max={sliderDiscountSetup.max}
+					step={sliderDiscountSetup.step}
+					marks={discountMax}
+					included={sliderDiscountSetup.included}
+					defaultValue={sliderDiscountSetup.defaultValue}
+					onChange={this.setEstimatedPricePercentageDifference}
+				/>
 			</div>
 		)
 	}

@@ -10,7 +10,6 @@ export const mapToggle = data => ({
 export const getFilterHomes = (queryParameters) => {
 	const urlParameters = qs.stringify(queryParameters)
 	const endpoint = `${serverAddress}/homes?${urlParameters}`
-	console.log(endpoint);
 	return {
 		[RSAA]: {
 			endpoint: endpoint,
