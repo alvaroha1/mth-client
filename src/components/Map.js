@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReactMapGL, {Marker} from 'react-map-gl'
 import './Map.css'
+import { getFilteredHomes } from '../redux/actions.js'
 import {debounce} from 'lodash'
 
 const accessToken = 'pk.eyJ1Ijoic3RldmVuc3B5cmFtaWQiLCJhIjoiY2puMWl4NDluM3g5aTNwcG56YWVhb293YiJ9.UpzML4DXnrPKkVdvY0IOJQ'
@@ -34,6 +35,11 @@ class Map extends Component {
 
 
 	refreshPage(viewport){
+		console.log('refreshPage');
+		console.log(viewport);
+		const newQueryParameters = this.props.queryParameters
+		newQueryParameters.estimatedPricePercentageDifference = value
+		this.props.getFilteredHomes(newQueryParameters);
 	}
 
 	render() {
@@ -46,9 +52,9 @@ class Map extends Component {
 						<div className="tooltip">
 							{home.estimatedPricePercentageDifference}%
 							<span className="tooltiptext">
-								<a href={home.url}>	
+								<a href={home.url}>
 									<img src={home.thumbnail}/>
-								</a>		
+								</a>
 							</span>
 						</div>
 					</span>
