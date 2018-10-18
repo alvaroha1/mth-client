@@ -125,7 +125,6 @@ class Filter extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	homes: state.filteredHomes,
 	queryParameters: state.queryParameters
 })
 
