@@ -34,7 +34,6 @@ const reducer = (state = initalState, action) => {
 		}
 
 	case 'FILTERED_HOMES_SUCCESS':
-		console.log('FILTERED_HOMES_SUCCESS');
 		return {
 			...state,
 			filteredHomes: action.payload,

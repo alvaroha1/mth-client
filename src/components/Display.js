@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Map from './Map';
 import ItemList from './ItemList';
 import { connect } from 'react-redux';
-import { getFilterHomes } from '../redux/actions.js';
+import { getFilteredHomes } from '../redux/actions.js';
 
 
 class Display extends Component {
@@ -14,7 +14,7 @@ class Display extends Component {
 	}
 
 	componentDidMount () {
-		this.props.getFilterHomes(this.props.queryParameters);
+		this.props.getFilteredHomes(this.props.queryParameters);
 		window.addEventListener("resize", this.resize);
 		this.setState({mapWidthAndHeight : this.mapContainer.offsetWidth})
 	}
@@ -57,7 +57,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getFilterHomes: (queryParameters) => dispatch(getFilterHomes(queryParameters))
+  getFilteredHomes: (queryParameters) => dispatch(getFilteredHomes(queryParameters))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Display)
