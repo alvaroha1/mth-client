@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import * as React from 'react'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import Bulma from 'bulma'
+import Bulma, {tile} from 'bulma'
 import './App.css'
 
 import Navbar from './components/Navbar'
@@ -12,11 +12,13 @@ import SwitchViews from './components/SwitchViews'
 class App extends Component {
 	render() {
 		return (
-			<div>
-				<div className="NavBar">
-					<Navbar />
+			<div className="tile is-ancestor is-vertical">
+				<div className="tile is-parent">
+					<div className="NavBar tile is-child">
+						<Navbar />
+					</div>
 				</div>
-		    	<div className="tile is-parent">
+				<div className="tile is-parent">
 					<div className="tile is-4 is-child impala">
 						<SwitchViews/>
 						<Filter/>

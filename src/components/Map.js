@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import ReactMapGL, {Marker} from 'react-map-gl'
-import { connect } from 'react-redux'
+import ReactMapGL, {Marker, LinearInterpolator} from 'react-map-gl'
+// import { connect } from 'react-redux'
 import './Map.css'
 
 // const _ = 
-const debounce = require('lodash.debounce')
+// const debounce = require('lodash.debounce')
 const accessToken = 'pk.eyJ1Ijoic3RldmVuc3B5cmFtaWQiLCJhIjoiY2puMWl4NDluM3g5aTNwcG56YWVhb293YiJ9.UpzML4DXnrPKkVdvY0IOJQ'
 
 class Map extends Component {
@@ -33,9 +33,9 @@ class Map extends Component {
 		return this.props.refreshDisplay()
 	}
 
-	fetchOnMapChange(){
-		console.log('yeah')
-	}
+	// fetchOnMapChange(){
+	// 	console.log('yeah')
+	// }
 	// fetchOnMapChangeDebounce () {
 	// 	debounce(this.fetchOnMapChange(),400)
 	// }
@@ -61,9 +61,12 @@ class Map extends Component {
 
 		return (
 			<ReactMapGL
+				transitionDuration={100}
+				// transitionInterpolator={new LinearInterpolator()}
 				mapboxApiAccessToken={accessToken}
 				{...this.state.viewport}
 				onViewportChange={(viewport) =>{
+					// onTransitionEnd(){
 					this.refreshWidth()
 					this.setState({viewport:{
 						...this.state.viewport,
@@ -71,9 +74,11 @@ class Map extends Component {
 						longitude: viewport.longitude,
 						zoom: viewport.zoom,
 					}})
-					this.fetchOnMapChange()
+					// this.fetchOnMapChange()
+					console.log('changed!!!')
 				}
 				}
+				// }
 			>
 				{list}
 			</ReactMapGL>
@@ -81,18 +86,21 @@ class Map extends Component {
 	}
 }
 
-const mapStateToProps = (state) => ({
-	queryParameters: state.queryParameters
-})
+// const mapStateToProps = (state) => ({
+// 	queryParameters: state.queryParameters
+// })
 
-const mapDispatchToProps = (dispatch) => ({
-	filterHomes: (filter) => dispatch({
-		type: 'FILTER_HOMES',
-		api: {
-			endpoint: '/homes?'+filter
-		}
-	}),
-	// queryParameters: (qp) => dispatch(queryParameters(qp))
-})
+// const mapDispatchToProps = (dispatch) => ({
+// 	filterHomes: (filter) => dispatch({
+// 		type: 'FILTER_HOMES',
+// 		api: {
+// 			endpoint: '/homes?'+filter
+// 		}
+// 	}),
+// 	// queryParameters: (qp) => dispatch(queryParameters(qp))
+// })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Map)
+// export default connect(mapStateToProps, mapDispatchToProps)(Map)
+
+
+export default Map

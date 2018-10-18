@@ -30,6 +30,7 @@ class Display extends Component {
     this.setState({ state: this.state });
 }	
 	render() {
+		console.log('this.props.homes from display:',this.props.homes)
 		if(this.props.isMapOn) {
 			return (
 				<div ref={(r)=>this.mapContainer = r} className="Display">
