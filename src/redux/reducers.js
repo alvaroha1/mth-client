@@ -33,18 +33,25 @@ const reducer = (state = initalState, action) => {
 			homes: action.data
 		}
 
-	case 'FILTER_HOMES_SUCCESS':
+	case 'FILTERED_HOMES_REQUEST':
 		return {
 			...state,
-			filteredHomes: action.data
+			errors: {},
+		}
+
+	case 'FILTERED_HOMES_SUCCESS':
+		return {
+			...state,
+			filteredHomes: action.payload,
+			errors: {},
 		}
 
 	case 'UPDATE_QUERY_PARAMETERS':
 		return {
 			...state,
 			queryParameters: action.qp
-		}		
-		
+		}
+
 	default:
 		return state
 	}

@@ -51,17 +51,12 @@ class Display extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	homes: state.filteredHomes,
+	filteredHomes: state.filteredHomes,
 	isMapOn: state.isMapOn
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getHomes: () => dispatch({
-    type: 'FILTER_HOMES',
-    api: {
-      endpoint: '/homes'
-    }
-	})
+  getFilterHomes: () => dispatch(getFilterHomes())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Display)
