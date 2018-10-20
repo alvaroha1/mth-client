@@ -24,8 +24,8 @@ Our client features a filter, a map and different metrics to help the user in th
 1. Clone the repo
 
 ```
-$ git clone https://github.com/alvaroha1/find-a-hobby-client.git
-$ cd find-a-hobby-client
+$ git clone https://github.com/alvaroha1/mth-client.git
+$ cd mth-client
 ```
 
 2. Install dependencies
@@ -33,18 +33,14 @@ $ cd find-a-hobby-client
 $ npm install
 ```
 
-3. Start development server
+3. Run MTH Api and MTh-Server before.
+
+4. Start development server
 ```
-$ npm run main
+$ npm start
 ```
 
-4. Connect client with server.
-
-Now you will be able to post and like hobbies with the deployed production database. 
-
-If you want to use a clean local and fast database (recommended for development): 
-1. start development server following instructions of https://github.com/alvaroha1/find-a-hobby-server
-2. In /src/lib/apiClient.js, change the variable URL to point to your IP address followed by the port where you are runnning the server. For example: const URL = 'http://192.168.1.191:3000'
+Now if you go to http://localhost:3000/ in your browser you should be able to see the site.
 
 ## Additional Features that might be implemented on a later date
 * Tests
