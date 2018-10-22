@@ -7,6 +7,7 @@ You will need to run the [MTH Client]( https://github.com/alvaroha1/mth-client),
 * [Tech Stack](#tech-stack)
 * [Screenshots](#screenshots)
 * [Getting started](#getting-started)
+* [Additional Features that might be implemented on a later date](#Additional-Features-that-might-be-implemented-on-a-later-date)
 * [Authors](#authors)
 * [License](#license)
 
